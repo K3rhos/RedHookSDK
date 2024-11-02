@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Headers\NativesCaller.h" />
+    <ClInclude Include="Headers\Natives.h" />
+    <ClInclude Include="Headers\Enums.h" />
+    <ClInclude Include="Headers\Math.h" />
+    <ClInclude Include="Headers\Structs.h" />
+    <ClInclude Include="Source\Application\Application.h" />
+    <ClInclude Include="Source\InputsManager\InputsManager.h" />
+    <ClInclude Include="Source\Features\NoClip\NoClip.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Source\Application\Application.cpp" />
+    <ClCompile Include="Source\InputsManager\InputsManager.cpp" />
+    <ClCompile Include="Source\Features\NoClip\NoClip.cpp" />
+  </ItemGroup>
+</Project>
