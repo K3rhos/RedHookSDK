@@ -25,6 +25,8 @@ using Time = float;
 
 
 
+// static void WAIT(int ms) { Invoke<0x7715C03B, void>(ms); } // We don't want to use WAIT native but our own Wait function instead.
+static void WAIT(int ms) { ScriptWait(ms); }
 static int FLOOR(float _X) { return Invoke<0x32E9BE04, int>(_X); }
 static float SIN_DEGREE(float _X) { return Invoke<0x55842354, float>(_X); }
 static float COS_DEGREE(float _X) { return Invoke<0x430207A4, float>(_X); }
@@ -52,8 +54,6 @@ static bool UI_ISACTIVE(const char* UiLayer) { return Invoke<0xB1FDB70D, bool>(U
 static void UI_ACTIVATE(const char* UiLayer) { Invoke<0xD11BD55A, void>(UiLayer); }
 static void SET_START_POS(int pram0, int pram1, int pram2, int pram3, int pram4) { Invoke<0x0CB93120, void>(pram0, pram1, pram2, pram3, pram4); }
 static int REQUEST_ASSET(const char* AssetDir, AssetType _AssetType) { return Invoke<0x9AA02DA7, int>(AssetDir, _AssetType); }
-// static void WAIT(int ms) { Invoke<0x7715C03B, void>(ms); } // We don't want to use WAIT native but our own Wait function instead.
-static void WAIT(int ms) { ScriptWait(ms); }
 static int START_NEW_SCRIPT(const char* _ScriptPath, int _StackSize) { return Invoke<0x3F166D0E, int>(_ScriptPath, _StackSize); }
 static int START_NEW_SCRIPT_WITH_ARGS(const char* _ScriptPath, int* _Args, int _ArgCount, int _StackSize) { return Invoke<0x4A2100E4, int>(_ScriptPath, _Args, _ArgCount, _StackSize); }
 static int LAUNCH_NEW_SCRIPT(const char* _ScriptPath, int _StackSize) { return Invoke<0x85A30503, int>(_ScriptPath, _StackSize); }
@@ -70,7 +70,7 @@ static void HUD_FADE_IN(int pram0, int pram1) { Invoke<0xF90F6C51, void>(pram0, 
 static void CAMERA_RESET(int pram0) { Invoke<0xCE956B28, void>(pram0); }
 static void STREAMING_SET_CUTSCENE_MODE(int pram0) { Invoke<0x83088F62, void>(pram0); }
 static void TERMINATE_THIS_SCRIPT() { Invoke<0x245B6AB6, void>(); }
-static Layout CREATE_LAYOUT(const char* layoutName) { return Invoke<0x6CA53214, Layout>(layoutName); }
+static Layout CREATE_LAYOUT(const char* _LayoutName) { return Invoke<0x6CA53214, Layout>(_LayoutName); }
 static void CLEAR_REGIONS() { Invoke<0xB1DAEF0C, void>(); }
 static int IS_PS3() { return Invoke<0xA369B36F, int>(); }
 static void UNK_0x7ABDE1F0(int pram0) { Invoke<0x7ABDE1F0, void>(pram0); }
@@ -213,7 +213,7 @@ static void PRINT_OBJECTIVE_FORMAT(int pram0, int pram1, int pram2, int pram3, i
 static int DECOR_SET_INT(int pram0, int pram1, int pram2) { return Invoke<0xDB718B21, int>(pram0, pram1, pram2); }
 static bool IS_OBJECT_VALID(Object _Object) { return Invoke<0xD7E7187B, bool>(_Object); }
 static Vector3 GET_OBJECT_POSITION(Object _Object) { Vector3 position; Invoke<0x31201B4C, bool>(_Object, &position); return position; }
-static int GET_OBJECT_TYPE(int pram0) { return Invoke<0x261ECB20, int>(pram0); }
+static ObjectType GET_OBJECT_TYPE(Object _Object) { return Invoke<0x261ECB20, ObjectType>(_Object); }
 static void GET_VOLUME_SCALE(int pram0, int pram1) { Invoke<0xE9C34ACC, void>(pram0, pram1); }
 static int ADD_BLIP_FOR_COORD(int pram0, int pram1, int pram2, int pram3, int pram4) { return Invoke<0xC6F43D0E, int>(pram0, pram1, pram2, pram3, pram4); }
 static void SET_BLIP_SCALE(Blip _Blip, float _Scale) { Invoke<0x1E6EC434, void>(_Blip, _Scale); }
@@ -352,7 +352,6 @@ static int STRING_GET_TOKEN(int pram0) { return Invoke<0xEE2791E5, int>(pram0); 
 static int UNK_0x990614C1(int pram0) { return Invoke<0x990614C1, int>(pram0); }
 static int IS_VOLUME_VALID(int pram0) { return Invoke<0xBC33CEB5, int>(pram0); }
 static void UNK_0xC0C6245E(int pram0) { Invoke<0xC0C6245E, void>(pram0); }
-static int GET_OBJECT_NAME(int pram0) { return Invoke<0xDF40614F, int>(pram0); }
 static int UNK_0x2803BDA8(int pram0) { return Invoke<0x2803BDA8, int>(pram0); }
 static void UNK_0x1BD78730(int pram0, int pram1, int pram2) { Invoke<0x1BD78730, void>(pram0, pram1, pram2); }
 static int UNK_0xF437B3D9(int pram0, int pram1, int pram2, int pram3) { return Invoke<0xF437B3D9, int>(pram0, pram1, pram2, pram3); }
@@ -689,7 +688,11 @@ static int UNK_0xD85CA776(int pram0) { return Invoke<0xD85CA776, int>(pram0); }
 static int GET_DRAFT_ACTOR(int pram0, int pram1) { return Invoke<0x48D5121D, int>(pram0, pram1); }
 static bool IS_ACTOR_DEAD(Actor actor) { return Invoke<0x0D798FFE, bool>(actor); }
 static int IS_OBJECT_IN_OBJECTSET(int pram0, int pram1) { return Invoke<0x0114FCBD, int>(pram0, pram1); }
-static const char* GET_ACTOR_NAME(Actor _Actor) { return Invoke<0x78CF43C1, const char*>(_Actor); }
+// static const char* GET_ACTOR_NAME(Actor _Actor) { return Invoke<0x78CF43C1, const char*>(_Actor); } // Exact same as 'GET_OBJECT_NAME', no need to use this native.
+// static const char* GET_LAYOUT_NAME(Layout _Layout) { return Invoke<0xBADE22A2, const char*>(_Layout); } // Exact same as 'GET_OBJECT_NAME', no need to use this native.
+// static const char* GET_SOMETHING_NAME(int _Something) { return Invoke<0xF662EAE1, const char*>(_Something); } // Exact same as 'GET_OBJECT_NAME', no need to use this native.
+static const char* GET_OBJECT_NAME(Object _Object) { return Invoke<0xDF40614F, const char*>(_Object); }
+static const char* _GET_OBJECT_GXT_ENTRY(Object _Object) { return Invoke<0x5C4262F9, const char*>(_Object); }
 static int UNK_0x1449EE9E(int pram0) { return Invoke<0x1449EE9E, int>(pram0); }
 static void AI_SET_NAV_MATERIAL_USAGE(int pram0, int pram1, int pram2) { Invoke<0x7B00615F, void>(pram0, pram1, pram2); }
 static void SET_ACTOR_EXEMPT_FROM_AMBIENT_RESTRICTIONS(int pram0, int pram1) { Invoke<0x4D0A87BF, void>(pram0, pram1); }
@@ -720,7 +723,6 @@ static void UNK_0x99AFD2D1(int pram0, int pram1, int pram2) { Invoke<0x99AFD2D1,
 static int GET_ACTOR_ENUM(int pram0) { return Invoke<0x0B28E9EC, int>(pram0); }
 static void UNK_0xC1F9A360(int pram0) { Invoke<0xC1F9A360, void>(pram0); }
 static void UNK_0xAD42EABC(int pram0, int pram1) { Invoke<0xAD42EABC, void>(pram0, pram1); }
-static int UNK_0x5C4262F9(int pram0) { return Invoke<0x5C4262F9, int>(pram0); }
 static int UNK_0x6C939AA7(int pram0, int pram1) { return Invoke<0x6C939AA7, int>(pram0, pram1); }
 static void TASK_USE_GRINGO(int pram0, int pram1, int pram2, int pram3, int pram4) { Invoke<0xA0E003A7, void>(pram0, pram1, pram2, pram3, pram4); }
 static void SET_ACTOR_STAY_WITHIN_VOLUME(int pram0, int pram1, int pram2, int pram3) { Invoke<0x6A4A1699, void>(pram0, pram1, pram2, pram3); }
@@ -2417,7 +2419,6 @@ static int GET_ACTOR_INVULNERABILITY(int pram0) { return Invoke<0xDB39D992, int>
 static int IS_AI_ACTOR_ENGAGED_IN_COMBAT(int pram0) { return Invoke<0x2DBCB78A, int>(pram0); }
 static void UNK_0xD15B53F8(int pram0) { Invoke<0xD15B53F8, void>(pram0); }
 static int UNK_0xD89C14BA(int pram0) { return Invoke<0xD89C14BA, int>(pram0); }
-static int GET_LAYOUT_NAME(int pram0) { return Invoke<0xBADE22A2, int>(pram0); }
 static void UNK_0x50A2051C(int pram0) { Invoke<0x50A2051C, void>(pram0); }
 static int UNK_0x79C748BE(int pram0, int pram1, int pram2) { return Invoke<0x79C748BE, int>(pram0, pram1, pram2); }
 static bool IS_BLIP_VISIBLE(Blip _Blip) { return Invoke<0x1E7A6623, bool>(_Blip); }
@@ -2542,7 +2543,7 @@ static int GET_GAME_STATE() { return Invoke<0xDD9BD22B, int>(); }
 static int CREATE_JOURNAL_ENTRY_BY_HASH(int pram0, int pram1, int pram2, int pram3) { return Invoke<0x619F1C3D, int>(pram0, pram1, pram2, pram3); }
 static int UNK_0x50C0E83F(int pram0) { return Invoke<0x50C0E83F, int>(pram0); }
 static int UNK_0x2776B0F5(int pram0) { return Invoke<0x2776B0F5, int>(pram0); }
-static void UNK_0xB008EF49(int pram0, int pram1, int pram2) { Invoke<0xB008EF49, void>(pram0, pram1, pram2); }
+static void _SET_WEAPON_AMMO_FOR_ITEM(int pram0, int pram1, int pram2) { Invoke<0xB008EF49, void>(pram0, pram1, pram2); }
 static int UNK_0xF750D150(int pram0, int pram1, int pram2) { return Invoke<0xF750D150, int>(pram0, pram1, pram2); }
 static void UNK_0x0E712FCB(int pram0, int pram1) { Invoke<0x0E712FCB, void>(pram0, pram1); }
 static void SET_PROP_TARGETABLE_ACQUISITION_RADIUS(int pram0, int pram1) { Invoke<0xE84EB2D5, void>(pram0, pram1); }
