@@ -59,7 +59,7 @@ static int START_NEW_SCRIPT_WITH_ARGS(const char* _ScriptPath, int* _Args, int _
 static int LAUNCH_NEW_SCRIPT(const char* _ScriptPath, int _StackSize) { return Invoke<0x85A30503, int>(_ScriptPath, _StackSize); }
 static int LAUNCH_NEW_SCRIPT_WITH_ARGS(const char* _ScriptPath, int* _Args, int _ArgCount, int _StackSize) { return Invoke<0xA602F586, int>(_ScriptPath, _Args, _ArgCount, _StackSize); }
 static bool IS_SCRIPT_VALID(int _ScriptId) { return Invoke<0x45F7D589, bool>(_ScriptId); }
-static Layout FIND_NAMED_LAYOUT(const char* LayoutName) { return Invoke<0x5699DE7E, Layout>(LayoutName); }
+static Layout FIND_NAMED_LAYOUT(const char* _LayoutName) { return Invoke<0x5699DE7E, Layout>(_LayoutName); }
 static bool _IS_LAYOUT_VALID(Layout Layout) { return Invoke<0xFC8E55ED, bool>(Layout); }
 static Actor FIND_ACTOR_IN_LAYOUT(Layout Layout, const char* ActorName) { return Invoke<0x53A761DE, Actor>(Layout, ActorName); }
 static bool IS_ACTOR_VALID(Actor Actor) { return Invoke<0xBA6C3E92, bool>(Actor); }
@@ -321,12 +321,12 @@ static Vector3 GET_CAMERA_DIRECTION(Camera _Camera) { Vector3 direction; Invoke<
 static Vector3 GET_CAMERA_POSITION(Camera _Camera) { Vector3 position; Invoke<0x4A65F0B7, void>(_Camera, &position); return position; }
 static void VSCALE(Vector3* Vector, float Scale) { Invoke<0x13530581, void>(Vector, Scale); }
 static int GET_ACTORENUM_FROM_STRING(const char* ActorName) { return Invoke<0x8B217CAC, int>(ActorName); }
-static void STREAMING_REQUEST_ACTOR(int pram0, int pram1, int pram2) { Invoke<0xB0A79FEE, void>(pram0, pram1, pram2); }
-static int STREAMING_IS_ACTOR_LOADED(int pram0, int pram1) { return Invoke<0x7DF72579, int>(pram0, pram1); }
+static void STREAMING_REQUEST_ACTOR(ActorModel _ActorModel, bool _Unk0, bool _Unk1) { Invoke<0xB0A79FEE, void>(_ActorModel, _Unk0, _Unk1); }
+static bool STREAMING_IS_ACTOR_LOADED(ActorModel _ActorModel, int _Unk) { return Invoke<0x7DF72579, bool>(_ActorModel, _Unk); }
 static int UNK_0x4A2063EC(int pram0) { return Invoke<0x4A2063EC, int>(pram0); }
 static int GET_OBJECT_ORIENTATION(int pram0, int pram1) { return Invoke<0x27B7D6D6, int>(pram0, pram1); }
 static Layout UNK_0xADE13224() { return Invoke<0xADE13224, Layout>(); }
-static Actor CREATE_ACTOR_IN_LAYOUT(Layout _Layout, const char* _ActorName, ActorModel _ActorModel, Vector3 _Position, Vector3 _Rotation) { return Invoke<0x8D67F397, Actor>(_Layout, _ActorName, _ActorModel, _Position, _Rotation); }
+static Actor CREATE_ACTOR_IN_LAYOUT(Layout _Layout, const char* _ActorName, ActorModel _ActorModel, Vector3* _Position, Vector3* _Rotation) { return Invoke<0x8D67F397, Actor>(_Layout, _ActorName, _ActorModel, _Position, _Rotation); }
 static void TASK_STAND_STILL(int pram0, int pram1, int pram2, int pram3) { Invoke<0x6F80965D, void>(pram0, pram1, pram2, pram3); }
 static int STRING_LOWER(int pram0) { return Invoke<0x3E785560, int>(pram0); }
 static void KILL_ACTOR(Actor _Actor) { Invoke<0x8B08ECA2, void>(_Actor); }
@@ -334,7 +334,7 @@ static void PRINT_FRAME_TIME(int pram0) { Invoke<0xB84DE79E, void>(pram0); }
 static int GET_ACTOR_AXIS(int pram0, int pram1, int pram2) { return Invoke<0x294A5549, int>(pram0, pram1, pram2); }
 static void SCRIPT_BREAKPOINT(int pram0) { Invoke<0xA81DABA3, void>(pram0); }
 static int UNK_0x025C9845(int pram0, int pram1, int pram2, int pram3, int pram4, int pram5, int pram6, int pram7, int pram8) { return Invoke<0x025C9845, int>(pram0, pram1, pram2, pram3, pram4, pram5, pram6, pram7, pram8); }
-static Object CREATE_PROP_IN_LAYOUT(Layout Layout, const char* PropName, const char* FragmentPath, Vector3 Position, Vector3 Rotation, bool Frozen) { return Invoke<0xE351587D, Object>(Layout, PropName, FragmentPath, Position, Rotation, Frozen); }
+static Object CREATE_PROP_IN_LAYOUT(Layout _Layout, const char* _PropName, const char* _FragmentPath, Vector3 _Position, Vector3 _Rotation, bool _Frozen) { return Invoke<0xE351587D, Object>(_Layout, _PropName, _FragmentPath, _Position, _Rotation, _Frozen); }
 static int FIND_OBJECT_IN_OBJECT(int pram0, int pram1) { return Invoke<0x070F9693, int>(pram0, pram1); }
 static int IN_TARGETTING_POSSE(int pram0, int pram1, int pram2, int pram3, int pram4, int pram5, int pram6, int pram7, int pram8) { return Invoke<0x88087384, int>(pram0, pram1, pram2, pram3, pram4, pram5, pram6, pram7, pram8); }
 static int SNAP_ACTOR_TO_GRINGO(int pram0, int pram1, int pram2, int pram3, int pram4, int pram5) { return Invoke<0xD0A845E9, int>(pram0, pram1, pram2, pram3, pram4, pram5); }
@@ -430,7 +430,7 @@ static int NET_START_NEW_SCRIPT(int pram0, int pram1) { return Invoke<0x84D6F8A7
 static int UNK_0xC739D1D2(int pram0) { return Invoke<0xC739D1D2, int>(pram0); }
 static int UNK_0xB50E95D7(int pram0) { return Invoke<0xB50E95D7, int>(pram0); }
 static void UNK_0x95FBA0B0(int pram0, int pram1) { Invoke<0x95FBA0B0, void>(pram0, pram1); }
-static void SET_PLAYER_CONTROL(int pram0, int pram1, int pram2, int pram3) { Invoke<0xD17AFCD8, void>(pram0, pram1, pram2, pram3); }
+static void SET_PLAYER_CONTROL(Player _Player, bool _AllowAllControls, bool _BlockOnlyCamera, int pram3) { Invoke<0xD17AFCD8, void>(_Player, _AllowAllControls, _BlockOnlyCamera, pram3); }
 static int UNK_0x243AF970(int pram0, int pram1, int pram2) { return Invoke<0x243AF970, int>(pram0, pram1, pram2); }
 static void UNK_0x598815BD(int pram0) { Invoke<0x598815BD, void>(pram0); }
 static void _PRINT_HELP(const char* _Text, float _Time, bool _IsLiteral, int _PrintType, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { Invoke<0xE42A8278, void>(_Text, _Time, _IsLiteral, _PrintType, _Unk1, _Unk2, _Unk3, _Unk4); }

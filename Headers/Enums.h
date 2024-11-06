@@ -140,7 +140,7 @@ enum Button : int
 
 
 
-enum ActorModel
+enum ActorModel : int
 {
 #pragma region BaseGame//{
 

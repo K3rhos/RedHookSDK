@@ -8,6 +8,15 @@
 
 
 
+enum LogType
+{
+	Log_Info = 1,
+	Log_Warning,
+	Log_Error
+};
+
+
+
 using f_KeyboardHandler = void(*)(DWORD _Key, WORD _Repeats, BYTE _ScanCode, BOOL _IsExtended, BOOL _IsWithAlt, BOOL _WasDownBefore, BOOL _IsUpNow);
 
 DLL_IMPORT void KeyboardHandlerRegister(f_KeyboardHandler _Function);
@@ -22,3 +31,5 @@ DLL_IMPORT void ScriptUnregister(HMODULE _Module);
 DLL_IMPORT void NativeInit(uint32_t _Hash);
 DLL_IMPORT void NativePush64(uint64_t _Value);
 DLL_IMPORT uint64_t* NativeCall();
+
+DLL_IMPORT void Print(LogType _Type, const char* _Format, ...);
