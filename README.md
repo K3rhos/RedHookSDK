@@ -1,4 +1,4 @@
-![RedHookReleasev0 2](https://github.com/user-attachments/assets/c9247011-ab6a-4c63-92b4-f77f7b8d717b)
+![RedHookRelease](https://github.com/user-attachments/assets/63b86846-c10d-48d3-bf3a-4a0b4c7a1f1a)
 
 # 🐴 RedHook Example Mod
 
