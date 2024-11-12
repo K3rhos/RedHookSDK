@@ -5,6 +5,107 @@
 
 
 
+struct Vector2
+{
+	float x;
+	float y;
+
+	Vector2() : x(0.0f), y(0.0f) {}
+	Vector2(float _X, float _Y) : x(_X), y(_Y) {}
+
+	Vector2 operator + (const Vector2& _Vector) const
+	{
+		return Vector2(x, y) += _Vector;
+	}
+
+	Vector2 operator - (const Vector2& _Vector) const
+	{
+		return Vector2(x, y) -= _Vector;
+	}
+
+	Vector2 operator * (float _Scalar) const
+	{
+		return Vector2(x, y) *= _Scalar;
+	}
+
+	Vector2 operator / (float _Scalar) const
+	{
+		return Vector2(x, y) /= _Scalar;
+	}
+
+	Vector2& operator += (const Vector2& _Vector)
+	{
+		x += _Vector.x;
+		y += _Vector.y;
+
+		return *this;
+	}
+
+	Vector2& operator -= (const Vector2& _Vector)
+	{
+		x -= _Vector.x;
+		y -= _Vector.y;
+
+		return *this;
+	}
+
+	Vector2& operator *= (float _Scalar)
+	{
+		x *= _Scalar;
+		y *= _Scalar;
+
+		return *this;
+	}
+
+	Vector2& operator /= (float _Scalar)
+	{
+		x /= _Scalar;
+		y /= _Scalar;
+
+		return *this;
+	}
+
+	static float Distance(const Vector2& _First, const Vector2& _Second)
+	{
+		Vector2 result = _First - _Second;
+
+		return result.GetMagnitude();
+	}
+
+	static Vector2 Lerp(const Vector2& _Start, const Vector2& _End, float _Time)
+	{
+		Vector2 result;
+
+		result.x = std::lerp(_Start.x, _End.x, _Time);
+		result.y = std::lerp(_Start.y, _End.y, _Time);
+
+		return result;
+	}
+
+	float GetMagnitude() const
+	{
+		return sqrtf(x * x + y * y);
+	}
+
+	void Normalize()
+	{
+		float magnitude = GetMagnitude();
+
+		if (magnitude > 0.0f)
+		{
+			x /= magnitude;
+			y /= magnitude;
+		}
+	}
+
+	bool IsNull() const
+	{
+		return x == 0.0f && y == 0.0f;
+	}
+};
+
+
+
 struct Vector3
 {
 	float x;
