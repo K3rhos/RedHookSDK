@@ -42,8 +42,9 @@ enum TextAlignment
 };
 
 DLL_IMPORT void RH_DrawRect(float _X, float _Y, float _Width, float _Height, int _R, int _G, int _B, int _A);
-DLL_IMPORT void RH_DrawText(const std::string& _Text, float _X, float _Y, int _FontId, float _FontScale, int _R, int _G, int _B, int _A, TextAlignment _TextAlignment);
-DLL_IMPORT float RH_GetTextWidth(const std::string& _Text, int _FontId, float _FontScale);
+DLL_IMPORT void RH_DrawText(const char* _Text, float _X, float _Y, int _FontId, float _FontScale, int _R, int _G, int _B, int _A, TextAlignment _TextAlignment);
+DLL_IMPORT float RH_GetTextWidth(const char* _Text, int _FontId, float _FontScale);
+
 
 
 enum Button : int
