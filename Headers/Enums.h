@@ -1882,3 +1882,12 @@ enum AssetType : int
 
     NUM_ASSET_TYPES
 };
+
+
+
+enum BlipId : int
+{
+    // TODO: Need to complete this list...
+    BLIP_ID_BONNIE = 300,
+    BLIP_ID_ENEMY = 322,
+};

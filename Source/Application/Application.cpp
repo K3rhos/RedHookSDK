@@ -8,7 +8,7 @@ void Application::Initialize(HMODULE _Module)
 
 	ScriptRegister(_Module, []
 	{
-		UNSORTED::PRINT_HELP_B("<blue>No Clip Controls\n<purple>[F5] On/Off\n[WASD] Move\n[Ctrl] Go Down\n[Space] Go Up\n[A] Speed-\n[E] Speed+\n[Shift] Speed Boost", 15.0f, true, 1, 0, 0, 0, 0);
+		UNSORTED::PRINT_HELP_B("<red>No Clip Controls\n</red>[F4] On/Off\n[WASD] Move\n[Ctrl] Go Down\n[Space] Go Up\n[Q] Speed-\n[E] Speed+\n[Shift] Speed Boost", 15.0f, true, 1, 0, 0, 0, 0);
 
 		while (true)
 		{

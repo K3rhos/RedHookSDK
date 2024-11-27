@@ -53,7 +53,7 @@ void NoClip::Update()
 {
 	Actor localPlayerActor = UNSORTED::GET_PLAYER_ACTOR(-1);
 
-	if (Input::IsKeyJustPressed(KEY_F5) || (UNSORTED::IS_BUTTON_DOWN(0, BUTTON_DPAD_DOWN) && UNSORTED::IS_BUTTON_PRESSED(0, BUTTON_B)))
+	if (Input::IsKeyJustPressed(KEY_F4) || (CORE::IS_BUTTON_DOWN(0, BUTTON_DPAD_DOWN) && CORE::IS_BUTTON_PRESSED(0, BUTTON_B)))
 	{
 		s_NoClip ^= true;
 
@@ -71,8 +71,8 @@ void NoClip::Update()
 
 	if (s_NoClip)
 	{
-		float leftStickX = UNSORTED::GET_STICK_X(0, false, 0);
-		float leftStickY = UNSORTED::GET_STICK_Y(0, false, 0);
+		float leftStickX = CORE::GET_STICK_X(0, false, 0);
+		float leftStickY = CORE::GET_STICK_Y(0, false, 0);
 
 		Vector3 position = UNSORTED::GET_POSITION(localPlayerActor);
 		float cameraHeading = UNSORTED::GET_OBJECT_HEADING(UNSORTED::GET_GAME_CAMERA());
@@ -90,7 +90,7 @@ void NoClip::Update()
 
 				speed = s_NoClipSpeeds[s_NoClipSpeedIndex];
 
-				_PRINT_BOTTOM_FORMAT("No Clip Speed <blue>x%d", (int)speed);
+				_PRINT_BOTTOM_FORMAT("No Clip Speed <red>x%d", (int)speed);
 			}
 		}
 		else if (Input::IsKeyJustPressed(KEY_E))
@@ -101,15 +101,15 @@ void NoClip::Update()
 
 				speed = s_NoClipSpeeds[s_NoClipSpeedIndex];
 
-				_PRINT_BOTTOM_FORMAT("No Clip Speed <blue>x%d", (int)speed);
+				_PRINT_BOTTOM_FORMAT("No Clip Speed <red>x%d", (int)speed);
 			}
 		}
 
 		// Handle speed boost
-		if (Input::IsKeyPressed(KEY_LEFT_SHIFT) || UNSORTED::IS_BUTTON_DOWN(0, BUTTON_STICK_LEFT))
+		if (Input::IsKeyPressed(KEY_LEFT_SHIFT) || CORE::IS_BUTTON_DOWN(0, BUTTON_STICK_LEFT))
 			speed *= 2.0f;
 
-		float movementSpeed = UNSORTED::TIMESTEP() * speed;
+		float movementSpeed = BUILTIN::TIMESTEP() * speed;
 
 		// Handle forward/backward/left/right movements
 		// NOTE: This support keyboard region, as an example is you're
@@ -134,11 +134,11 @@ void NoClip::Update()
 			position += GET_RIGHT_VECTOR(localPlayerActor) * leftStickX * movementSpeed;
 
 		// Handle going up/down
-		if (Input::IsKeyPressed(KEY_SPACE) || UNSORTED::IS_BUTTON_DOWN(0, BUTTON_A))
+		if (Input::IsKeyPressed(KEY_SPACE) || CORE::IS_BUTTON_DOWN(0, BUTTON_A))
 		{
 			position.y += movementSpeed;
 		}
-		else if (Input::IsKeyPressed(KEY_LEFT_CTRL) || UNSORTED::IS_BUTTON_DOWN(0, BUTTON_X))
+		else if (Input::IsKeyPressed(KEY_LEFT_CTRL) || CORE::IS_BUTTON_DOWN(0, BUTTON_X))
 		{
 			position.y -= movementSpeed;
 		}
