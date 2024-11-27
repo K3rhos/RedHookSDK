@@ -310,7 +310,7 @@ namespace HEALTH
 
 namespace TARGETING
 {
-	static Actor GET_ACTOR_UNDER_RETICLE(Actor _Actor, bool _Unk1) { return Invoke<0x86BAAC6C, Actor>(_Actor, _Unk1); }
+	static Actor GET_ACTOR_UNDER_RETICLE(Actor _Actor, int _Flag) { return Invoke<0x86BAAC6C, Actor>(_Actor, _Flag); }
 	static bool GET_RETICLE_TARGET_POINT(Actor _Actor, Vector3* _Position) { return Invoke<0x8AE7281E, bool>(_Actor, _Position); }
 	static void SET_PLAYER_PERFECT_ACCURACY(Player _Player, bool _Enabled) { Invoke<0x5F566576, void>(_Player, _Enabled); }
 	static void OVERRIDE_PLAYER_TARGETING_WEIGHTS(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0xD95C01D2, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
@@ -382,8 +382,8 @@ namespace UNSORTED
 	static int ADD_ITEM(const char* ItemName, Actor Actor, int Unk1) { return Invoke<0xBAA5D41B, int>(ItemName, Actor, Unk1); }
 	static void SET_PLAYER_DEADEYE_POINTS(Actor _Actor, float _Value, bool _Unk) { Invoke<0x50D8C840, void>(_Actor, _Value, _Unk); }
 	static void SET_DISABLE_DEADEYE(Actor _Actor, bool _Value) { Invoke<0x09716951, void>(_Actor, _Value); }
-	static void SET_DEADEYE_MULTILOCK_ENABLE(int _Unk0, int _Unk1) { Invoke<0x4E6E5E78, void>(_Unk0, _Unk1); }
-	static void SET_DEADEYE_TARGETPAINT_ENABLE(int _Unk0, int _Unk1) { Invoke<0x5CD6E2C3, void>(_Unk0, _Unk1); }
+	static void SET_DEADEYE_MULTILOCK_ENABLE(Actor _Actor, bool _Value) { Invoke<0x4E6E5E78, void>(_Actor, _Value); }
+	static void SET_DEADEYE_TARGETPAINT_ENABLE(Actor _Actor, bool _Value) { Invoke<0x5CD6E2C3, void>(_Actor, _Value); }
 	static void DELETE_WEAPON_FROM_ACTOR(Actor _Actor, WeaponModel _WeaponModel) { Invoke<0xCB017277, void>(_Actor, _WeaponModel); }
 	static void _ADD_AMMO_OF_TYPE(Actor _Actor, int _AmmoType, float _AmmoCount, bool _Unk0, bool _Notify) { Invoke<0x98B3ABFA, void>(_Actor, _AmmoType, _AmmoCount, _Unk0, _Notify); }
 	static int ACTOR_SET_NEXT_EQUIP_SLOT(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x3417766E, int>(_Unk0, _Unk1, _Unk2); }
@@ -429,7 +429,7 @@ namespace UNSORTED
 	static bool IS_STRING_VALID(const char* _Unk0) { return Invoke<0xBDC61056, bool>(_Unk0); }
 	static int ADD_COLLECTABLE(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0xF05D1566, int>(_Unk0, _Unk1, _Unk2); }
 	static void SET_WEAPON_GOLD(Actor _Actor, WeaponModel _WeaponModel, bool _Gold) { Invoke<0xAE44869D, void>(_Actor, _WeaponModel, _Gold); }
-	static void UI_CHEAT_SET_STATE(int _Unk0, int _Unk1) { Invoke<0x7D6A8D4A, void>(_Unk0, _Unk1); }
+	static void UI_CHEAT_SET_STATE(int _CheatId, bool _Enabled) { Invoke<0x7D6A8D4A, void>(_CheatId, _Enabled); }
 	static bool HAS_ACHIEVEMENT_BEEN_PASSED(int _Id) { return Invoke<0x136A5BE9, bool>(_Id); }
 	static void AWARD_ACHIEVEMENT(int _Id) { Invoke<0xCAA24B1A, void>(_Id); }
 	static int AWARD_AVATAR(int _Unk0) { return Invoke<0xDD33E221, int>(_Unk0); }
@@ -577,7 +577,7 @@ namespace UNSORTED
 	static int IN_TARGETTING_POSSE(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8) { return Invoke<0x88087384, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
 	static int SNAP_ACTOR_TO_GRINGO(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { return Invoke<0xD0A845E9, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static void AUDIO_MUSIC_FORCE_TRACK(const char* SongName, const char* Mood, int _Unk2, int _Unk3, int _Unk4, float _Unk5, int _Unk6) { Invoke<0xA2A356A7, void>(SongName, Mood, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6); }
-	static int AI_IGNORE_ACTOR(int _Unk0) { return Invoke<0x8D1FC73C, int>(_Unk0); }
+	static bool AI_IGNORE_ACTOR(Actor _Actor) { return Invoke<0x8D1FC73C, bool>(_Actor); }
 	static void AI_STOP_IGNORING_ACTORS() { Invoke<0x4DF3C5D1, void>(); }
 	static void DELETE_ALL_INVENTORY_FROM_ACTOR(Actor _Actor) { Invoke<0x5AEB2E4F, void>(_Actor); }
 	static int GET_AMMOENUM_FOR_WEAPONENUM(int _Unk0) { return Invoke<0x17883570, int>(_Unk0); }
@@ -749,9 +749,9 @@ namespace UNSORTED
 	static int STREAMING_IS_SCRIPT_LOADED(int _Unk0) { return Invoke<0xB5B4AEAD, int>(_Unk0); }
 	static int STREAMING_IS_MOVABLE_NAV_MESH_RESIDENT(int _Unk0) { return Invoke<0x8A0D3339, int>(_Unk0); }
 	static int STREAMING_IS_GRINGO_DICTIONARY_LOADED(int _Unk0) { return Invoke<0x67994764, int>(_Unk0); }
-	static int UI_CHEAT_GET_STATE(int _Unk0) { return Invoke<0x01309706, int>(_Unk0); }
-	static void UI_CHEAT_SET_CODE(int _Unk0, int _Unk1) { Invoke<0x90CD8795, void>(_Unk0, _Unk1); }
-	static void UI_CHEAT_SET_VALUE(int _Unk0, int _Unk1) { Invoke<0x9E88643A, void>(_Unk0, _Unk1); }
+	static bool UI_CHEAT_GET_STATE(int _CheatId) { return Invoke<0x01309706, bool>(_CheatId); }
+	static void UI_CHEAT_SET_CODE(int _CheatId, int _Unk1) { Invoke<0x90CD8795, void>(_CheatId, _Unk1); }
+	static void UI_CHEAT_SET_VALUE(int _CheatId, int _Unk1) { Invoke<0x9E88643A, void>(_CheatId, _Unk1); }
 	static void RESET_GLOBAL_ACTOR_WEAPON_BIAS() { Invoke<0xDAD46FAB, void>(); }
 	static void HORSE_SET_INFINITE_FRESHNESS_CHEAT(bool _Toggle) { Invoke<0xB731EB45, void>(_Toggle); }
 	static void FIRE_SET_GUNS_BLAZING_ACTIVE(bool _IsActive) { Invoke<0x3F67DEDB, void>(_IsActive); }
@@ -905,7 +905,7 @@ namespace UNSORTED
 	static int AI_HAS_PLAYER_PROJECTILE_IMPACTED_WITHIN(int _Unk0, int _Unk1) { return Invoke<0x059F64B8, int>(_Unk0, _Unk1); }
 	static int AI_HAS_PLAYER_PROJECTILE_NEAR_MISSED_WITHIN(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0xD8574E09, int>(_Unk0, _Unk1, _Unk2); }
 	static int IS_ACTOR_HANDSUP(int _Unk0) { return Invoke<0xA5A24484, int>(_Unk0); }
-	static int IS_PLAYER_WEAPON_ZOOMED(int _Unk0) { return Invoke<0x0A842786, int>(_Unk0); }
+	static bool IS_PLAYER_WEAPON_ZOOMED(Actor _Actor) { return Invoke<0x0A842786, bool>(_Actor); }
 	static int MEMORY_GET_IS_VISIBLE(int _Unk0, int _Unk1) { return Invoke<0x45CE40FD, int>(_Unk0, _Unk1); }
 	static int GET_ACTOR_MELEE_TARGETED_BY(int _Unk0) { return Invoke<0x02365961, int>(_Unk0); }
 	static int _0x7F454A92(int _Unk0) { return Invoke<0x7F454A92, int>(_Unk0); }
@@ -1129,7 +1129,7 @@ namespace UNSORTED
 	static void ADD_COMPANION_PERMANENT() { Invoke<0x45E20057, void>(); }
 	static void FREE_FROM_HOGTIE(int _Unk0) { Invoke<0x31AD57FE, void>(_Unk0); }
 	static void TASK_OVERRIDE_SET_POSTURE(int _Unk0, int _Unk1) { Invoke<0x52D34567, void>(_Unk0, _Unk1); }
-	static int IS_PLAYER_DEADEYE(int _Unk0) { return Invoke<0x6148423A, int>(_Unk0); }
+	static bool IS_PLAYER_DEADEYE(Actor _Actor) { return Invoke<0x6148423A, bool>(_Actor); }
 	static void CANCEL_DEADEYE() { Invoke<0xCB0BDCE9, void>(); }
 	static void CANCEL_TIME_WARP(int _Unk0) { Invoke<0xAF50E8A1, void>(_Unk0); }
 	static void FIRE_STOP_FLAMES_IN_VOLUME(int _Unk0) { Invoke<0x11A65FFB, void>(_Unk0); }
@@ -1459,7 +1459,7 @@ namespace UNSORTED
 	static int LEASH_DETACH_OBJECT(int _Unk0, int _Unk1) { return Invoke<0x951B8DF7, int>(_Unk0, _Unk1); }
 	static bool IS_PLAYER_TARGETTING_ACTOR(Player _Player, Actor _Target, bool _Unk2) { return Invoke<0x87DDCA96, bool>(_Player, _Target, _Unk2); }
 	static void TASK_FLEE_COORD(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { Invoke<0x826D3459, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
-	static int AI_STOP_IGNORING_ACTOR(int _Unk0) { return Invoke<0x98790639, int>(_Unk0); }
+	static bool AI_STOP_IGNORING_ACTOR(Actor _Actor) { return Invoke<0x98790639, bool>(_Actor); }
 	static void TASK_CROUCH(Actor _Actor, float _Durability) { Invoke<0x616C803C, void>(_Actor, _Durability); }
 	static int GET_OBJECT_FROM_SQUAD(int _Unk0) { return Invoke<0xEDA897FA, int>(_Unk0); }
 	static void MEMORY_CONSIDER_ACCORDING_TO_FACTION(int _Unk0, int _Unk1) { Invoke<0xACD4084D, void>(_Unk0, _Unk1); }
@@ -1630,7 +1630,7 @@ namespace UNSORTED
 	static void TASK_SHOOT_ENEMIES_FROM_POSITION(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0xCF8DB984, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
 	static int SET_ACTOR_ANIM_CURRENT_TIME(int _Unk0, int _Unk1) { return Invoke<0x8626C1A0, int>(_Unk0, _Unk1); }
 	static void SET_ALLOW_DEADEYE_LOCKS(int _Unk0, int _Unk1) { Invoke<0xA1BFC1A5, void>(_Unk0, _Unk1); }
-	static void SET_DEADEYE_LOCKS_ON_HEAD_ONLY(int _Unk0, int _Unk1) { Invoke<0x9375946B, void>(_Unk0, _Unk1); }
+	static void SET_DEADEYE_LOCKS_ON_HEAD_ONLY(Actor _Actor, bool _Enabled) { Invoke<0x9375946B, void>(_Actor, _Enabled); }
 	static int FLOAT_TO_STRING_VERBOSE(int _Unk0) { return Invoke<0x5E339E16, int>(_Unk0); }
 	static int ATTACH_OBJECTS_CONTINUOUS(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x319D70BD, int>(_Unk0, _Unk1, _Unk2); }
 	static void TASK_OVERRIDE_CLEAR_POSTURE(int _Unk0) { Invoke<0x5394CF3B, void>(_Unk0); }
@@ -1955,9 +1955,9 @@ namespace UNSORTED
 	static void NET_GAMER_SET_TEAM(int _Unk0, int _Unk1) { Invoke<0xE79F6CD4, void>(_Unk0, _Unk1); }
 	static void SET_PLAYER_CONTROL_CONFIG(int _Unk0, int _Unk1) { Invoke<0x01B84BCA, void>(_Unk0, _Unk1); }
 	static void SET_FORCE_PLAYER_AIM_MODE(int _Unk0, int _Unk1) { Invoke<0x1CFAF2EA, void>(_Unk0, _Unk1); }
-	static void PPP_UNLOAD_PRESET(int _Unk0) { Invoke<0xB6CA7EBF, void>(_Unk0); }
+	static void PPP_UNLOAD_PRESET(const char* _Preset) { Invoke<0xB6CA7EBF, void>(_Preset); }
 	static void NET_GAMER_ICON_FORCE_VISIBILITY(int _Unk0, int _Unk1) { Invoke<0x160E79C6, void>(_Unk0, _Unk1); }
-	static void PPP_LOAD_PRESET(int _Unk0) { Invoke<0x6E946AF8, void>(_Unk0); }
+	static void PPP_LOAD_PRESET(const char* _Preset) { Invoke<0x6E946AF8, void>(_Preset); }
 	static int CREATE_POINT_LIGHT_IN_LAYOUT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8) { return Invoke<0xF9CC7F63, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
 	static void UI_SUPPRESS(char* uiLayer) { Invoke<0x182EC44A, void>(uiLayer); }
 	static int GET_PATH_NUM_POINTS(int _Unk0) { return Invoke<0x42A4CCD5, int>(_Unk0); }
@@ -2189,8 +2189,8 @@ namespace UNSORTED
 	static void AI_SET_NAV_HAZARD_AVOIDANCE_ENABLED(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x5D752432, void>(_Unk0, _Unk1, _Unk2); }
 	static void SET_ACTOR_SEX(int _Unk0, int _Unk1) { Invoke<0x9C42B7A2, void>(_Unk0, _Unk1); }
 	static void AI_SET_TR_PROGRAM_FOR_ACTOR(int _Unk0, int _Unk1) { Invoke<0x4D53AC21, void>(_Unk0, _Unk1); }
-	static void SET_ACTOR_HARD_LOCK_AQUIRE_BONE_CASUAL(int _Unk0, int _Unk1) { Invoke<0x12A86E9D, void>(_Unk0, _Unk1); }
-	static void SET_ACTOR_HARD_LOCK_AQUIRE_BONE(int _Unk0, int _Unk1) { Invoke<0x5613615B, void>(_Unk0, _Unk1); }
+	static void SET_ACTOR_HARD_LOCK_AQUIRE_BONE_CASUAL(Actor _Actor, const char* _BoneName) { Invoke<0x12A86E9D, void>(_Actor, _BoneName); }
+	static void SET_ACTOR_HARD_LOCK_AQUIRE_BONE(Actor _Actor, const char* _BoneName) { Invoke<0x5613615B, void>(_Actor, _BoneName); }
 	static int COMBAT_CLASS_REQUEST_GET_ENUM_INT() { return Invoke<0x76478D6E, int>(); }
 	static bool FIRE_IS_HANDLE_VALID(FireHandle _FireHandle) { return Invoke<0xA488E930, bool>(_FireHandle); }
 	static void FIRE_CREATE_ON_ACTOR(FireHandle _FireHandle, Actor _Actor) { Invoke<0x9679CF84, void>(_FireHandle, _Actor); }
@@ -3161,4 +3161,8 @@ namespace REDHOOK
 	static Object GET_OBJECT_FROM_ADDRESS(uintptr_t _Addr) { return Invoke<0xFB05516E, Object>(_Addr); }
 	static int WORLD_GET_ALL_ACTORS(Actor* _Array) { return Invoke<0xD892AD02, int>(_Array); }
 	static bool WORLD_TO_SCREEN(Vector3* _WorldPosition, float* _X, float* _Y) { return Invoke<0xBAA72911, bool>(_WorldPosition, _X, _Y); }
+	static void SET_PLAYER_RELOAD_TIME_SCALE(bool _Override, float _TimeScale) { Invoke<0x6FCC9A11, void>(_Override, _TimeScale); }
+	static void SET_PLAYER_AUTO_FIRING(bool _AutoFiring) { Invoke<0x064E9472, void>(_AutoFiring); }
+	static float GET_TIME_SCALE() { return Invoke<0x8CFD581F, float>(); }
+	static void SET_TIME_SCALE(float _TimeScale) { Invoke<0xA7F84694, void>(_TimeScale); }
 }
