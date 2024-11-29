@@ -232,3 +232,8 @@ struct Vector3
 		return x == 0.0f && y == 0.0f && z == 0.0f;
 	}
 };
+
+
+
+#define PACK_VECTOR3_FROM_XYZ(_X, _Y, _Z) Vector2(_X, _Y), _Z
+#define PACK_VECTOR3(_Position) Vector2(_Position.x, _Position.y), _Position.z
