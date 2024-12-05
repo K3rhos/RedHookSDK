@@ -3335,7 +3335,7 @@ namespace UI_HUD
 	static void UI_ADDICON(int _IconId, const char* _IconName) { Invoke<0x724B4E9B, void>(_IconId, _IconName); }
 }
 
-namespace VEHICLE
+namespace VEHICLES
 {
 	static Vehicle GET_ACTOR_MOST_RECENT_VEHICLE(Actor _Actor) { return Invoke<0x58745E4B, Vehicle>(_Actor); }
 	static bool IS_ACTOR_ON_TRAIN(Actor _Actor, bool _Unk0) { return Invoke<0xD36E2D54, bool>(_Actor, _Unk0); }
