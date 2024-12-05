@@ -5,7 +5,7 @@
 static Vector3 GET_FORWARD_VECTOR(Actor _Actor)
 {
 	Vector3 forward;
-	float heading = UNSORTED::GET_HEADING(_Actor) + 90.0f;
+	float heading = ACTOR::GET_HEADING(_Actor) + 90.0f;
 
 	heading *= Math<float>::DegToRad;
 
@@ -21,7 +21,7 @@ static Vector3 GET_FORWARD_VECTOR(Actor _Actor)
 static Vector3 GET_RIGHT_VECTOR(Actor _Actor)
 {
 	Vector3 right;
-	float heading = UNSORTED::GET_HEADING(_Actor) + 180.0f;
+	float heading = ACTOR::GET_HEADING(_Actor) + 180.0f;
 
 	heading *= Math<float>::DegToRad;
 
@@ -44,28 +44,28 @@ static void _PRINT_BOTTOM_FORMAT(const char* _Format, ...)
 	_vsnprintf_s(buffer, sizeof(buffer), _Format, vaBuffer);
 	va_end(vaBuffer);
 
-	UNSORTED::PRINT_SMALL_B(buffer, 0.5f, true, 0, 0, 0, 0);
+	HUD::PRINT_SMALL_B(buffer, 0.5f, true, 0, 0, 0, 0);
 }
 
 
 
 void NoClip::Update()
 {
-	Actor localPlayerActor = UNSORTED::GET_PLAYER_ACTOR(-1);
+	Actor localPlayerActor = ACTOR::GET_PLAYER_ACTOR(-1);
 
 	if (Input::IsKeyJustPressed(KEY_F4) || (CORE::IS_BUTTON_DOWN(0, BUTTON_DPAD_DOWN) && CORE::IS_BUTTON_PRESSED(0, BUTTON_B)))
 	{
 		s_NoClip ^= true;
 
-		UNSORTED::SET_MOVER_FROZEN(localPlayerActor, s_NoClip);
+		ENTITY::SET_MOVER_FROZEN(localPlayerActor, s_NoClip);
 
 		if (s_NoClip)
 		{
-			UNSORTED::PRINT_SMALL_B("No Clip <green>On", 0.5f, true, 0, 0, 0, 0);
+			HUD::PRINT_SMALL_B("No Clip <green>On", 0.5f, true, 0, 0, 0, 0);
 		}
 		else
 		{
-			UNSORTED::PRINT_SMALL_B("No Clip <red>Off", 0.5f, true, 0, 0, 0, 0);
+			HUD::PRINT_SMALL_B("No Clip <red>Off", 0.5f, true, 0, 0, 0, 0);
 		}
 	}
 
@@ -74,8 +74,8 @@ void NoClip::Update()
 		float leftStickX = CORE::GET_STICK_X(0, false, 0);
 		float leftStickY = CORE::GET_STICK_Y(0, false, 0);
 
-		Vector3 position = UNSORTED::GET_POSITION(localPlayerActor);
-		float cameraHeading = UNSORTED::GET_OBJECT_HEADING(UNSORTED::GET_GAME_CAMERA());
+		Vector3 position = ACTOR::GET_POSITION(localPlayerActor);
+		float cameraHeading = OBJECT::GET_OBJECT_HEADING(CAM::GET_GAME_CAMERA());
 
 		const float stickDeadZone = 0.02f;
 
@@ -143,7 +143,7 @@ void NoClip::Update()
 			position.y -= movementSpeed;
 		}
 
-		UNSORTED::TELEPORT_ACTOR(localPlayerActor, &position, false, false, false);
-		UNSORTED::SET_ACTOR_HEADING(localPlayerActor, cameraHeading, false);
+		ACTOR::TELEPORT_ACTOR(localPlayerActor, &position, false, false, false);
+		ACTOR::SET_ACTOR_HEADING(localPlayerActor, cameraHeading, false);
 	}
 }
