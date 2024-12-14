@@ -55,3 +55,5 @@ DLL_IMPORT void RH_SetTextWrapWidth(float _WrapWidth);
 
 
 DLL_IMPORT void RH_ActionDisable(const char* _ActionName, bool _Disabled);
+
+DLL_IMPORT void* GetGlobalPtr(int _Index);
