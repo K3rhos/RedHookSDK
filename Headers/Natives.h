@@ -30,7 +30,7 @@ using Time = float;
 namespace ACTOR
 {
 	static void TELEPORT_ACTOR(Actor _Actor, const Vector3* _Position, bool _UnkFlag0, bool _UnkFlag1, bool _UnkFlag2) { Invoke<0x2D54B916, void>(_Actor, _Position, _UnkFlag0, _UnkFlag1, _UnkFlag2); }
-	static void TELEPORT_ACTOR_WITH_HEADING(Actor _Actor, Vector3* _Position, float _Heading, bool _UnkFlag0, bool _UnkFlag1, bool _UnkFlag2) { Invoke<0xE4DE507C, void>(_Actor, _Position, _Heading, _UnkFlag0, _UnkFlag1, _UnkFlag2); }
+	static void TELEPORT_ACTOR_WITH_HEADING(Actor _Actor, Vector2 _PositionXY, float _PositionZ, float _Heading, bool _UnkFlag0, bool _UnkFlag1, bool _UnkFlag2) { Invoke<0xE4DE507C, void>(_Actor, _PositionXY, _PositionZ, _Heading, _UnkFlag0, _UnkFlag1, _UnkFlag2); }
 	static Vector3 GET_POSITION(Actor _Actor) { Vector3 position; Invoke<0x99BD9D6F, void>(_Actor, &position); return position; }
 	static float GET_HEADING(Actor _Actor) { return Invoke<0x42DE39F0, float>(_Actor); }
 	static int GET_ACTOR_AXIS(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x294A5549, int>(_Unk0, _Unk1, _Unk2); }
@@ -40,10 +40,10 @@ namespace ACTOR
 	static int GET_PHYSINST_FROM_ACTOR(int _Unk0) { return Invoke<0x758F993A, int>(_Unk0); }
 	static int CAN_ACTOR_HOGTIE_TARGET(int _Unk0, int _Unk1) { return Invoke<0x1AA3A0C0, int>(_Unk0, _Unk1); }
 	static bool IS_ACTOR_PLAYER(Actor _Actor) { return Invoke<0xB27E91E7, bool>(_Actor); }
-	static bool IS_ACTOR_LOCAL_PLAYER(int actor) { return Invoke<0x6542CF26, bool>(actor); }
-	static int GET_DEBUG_PADINDEX() { return Invoke<0xB114332D, int>(); }
-	static Controller _GET_ACTOR_CONTROLLER(int ActorId) { return Invoke<0x524F6981, Controller>(ActorId); }
-	static int GET_PLAYER_PADINDEX_NO_ACTOR(int _Unk0) { return Invoke<0xCF02D1D6, int>(_Unk0); }
+	static bool IS_ACTOR_LOCAL_PLAYER(Actor _Actor) { return Invoke<0x6542CF26, bool>(_Actor); }
+	static Controller GET_DEBUG_PADINDEX() { return Invoke<0xB114332D, int>(); }
+	static Controller GET_PLAYER_PADINDEX(Actor _Actor) { return Invoke<0x524F6981, Controller>(_Actor); }
+	static Controller GET_PLAYER_PADINDEX_NO_ACTOR() { return Invoke<0xCF02D1D6, Controller>(); }
 	static void SET_PLAYER_PADINDEX(int _Unk0, int _Unk1) { Invoke<0x8F82B7D4, void>(_Unk0, _Unk1); }
 	static void SET_PLAYER_CONTROL(Player _Player, bool _AllowAllControls, int _Flags, int _Unk3) { Invoke<0xD17AFCD8, void>(_Player, _AllowAllControls, _Flags, _Unk3); }
 	static void SET_PLAYER_ENABLE_MOUNT_USE_CONTEXTS(Actor _Actor, bool _Value) { Invoke<0xBEEDDD54, void>(_Actor, _Value); }
@@ -57,8 +57,8 @@ namespace ACTOR
 	static int GET_PLAYER_CONTROL_CONFIG(int _Unk0) { return Invoke<0x8421033D, int>(_Unk0); }
 	static void SET_PLAYER_CONTROL_CONFIG(int _Unk0, int _Unk1) { Invoke<0x01B84BCA, void>(_Unk0, _Unk1); }
 	static void PLAYER_RUMBLE(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x2E0EC2F2, void>(_Unk0, _Unk1, _Unk2); }
-	static void SET_PLAYER_CURRENT_NOTORIETY(float _Level) { Invoke<0x4B0D6152, void>(0, _Level); }
-	static void SET_PLAYER_CURRENT_HONOR(float _Level) { Invoke<0x4D918005, void>(0, _Level); }
+	static void SET_PLAYER_CURRENT_NOTORIETY(float _Level) { Invoke<0x4B0D6152, void>(_Level); }
+	static void SET_PLAYER_CURRENT_HONOR(float _Level) { Invoke<0x4D918005, void>(_Level); }
 	static void SET_PLAYER_COMBATMODE(int _CombatMode) { Invoke<0x57595189, void>(_CombatMode); }
 	static int GET_PLAYER_COMBATMODE() { return Invoke<0x86E193B8, int>(); }
 	static void SET_PLAYER_COMBATMODE_OVERRIDE(int _Unk0) { Invoke<0xAFFBBE78, void>(_Unk0); }
@@ -123,7 +123,7 @@ namespace ACTOR
 	static void SET_ALLOW_EXECUTE(int _Unk0, int _Unk1) { Invoke<0x5896817B, void>(_Unk0, _Unk1); }
 	static void SET_ALLOW_DEADEYE_LOCKS(int _Unk0, int _Unk1) { Invoke<0xA1BFC1A5, void>(_Unk0, _Unk1); }
 	static void SET_DEADEYE_LOCKS_ON_HEAD_ONLY(Actor _Actor, bool _Enabled) { Invoke<0x9375946B, void>(_Actor, _Enabled); }
-	static void ACTOR_DISMOUNT_NOW(int _Unk0) { Invoke<0x0666B436, void>(_Unk0); }
+	static void ACTOR_DISMOUNT_NOW(Actor _Actor) { Invoke<0x0666B436, void>(_Actor); }
 	static int IS_ACTOR_REACTING(int _Unk0) { return Invoke<0xBFD6AE3D, int>(_Unk0); }
 	static int GET_ACTOR_UPDATE_PRIORITY(int _Unk0) { return Invoke<0x6D322CD3, int>(_Unk0); }
 	static void SET_ACTOR_UPDATE_PRIORITY(int _Unk0, int _Unk1) { Invoke<0x44C05EF6, void>(_Unk0, _Unk1); }
@@ -652,7 +652,7 @@ namespace AUDIO
 	static int SAY_SINGLE_LINE_STRING_SCRIPTED_INTERRUPT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8, int _Unk9, int _Unk10, int _Unk11, int _Unk12) { return Invoke<0x3F226995, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8, _Unk9, _Unk10, _Unk11, _Unk12); }
 	static void AUDIO_PLAY_VOCAL_EFFECT(int _Unk0, int _Unk1, int _Unk2) { Invoke<0xC9D3A484, void>(_Unk0, _Unk1, _Unk2); }
 	static void AUDIO_PLAY_PAIN(int _Unk0, int _Unk1) { Invoke<0x123709E8, void>(_Unk0, _Unk1); }
-	static void SET_AMBIENT_VOICE_NAME(int _Unk0, int _Unk1) { Invoke<0xBD2EA1A1, void>(_Unk0, _Unk1); }
+	static void SET_AMBIENT_VOICE_NAME(Actor _Actor, const char* _Name) { Invoke<0xBD2EA1A1, void>(_Actor, _Name); }
 	static void CLEAR_ALTERNATE_SPEECH_CONTEXT_FOR_PAIN(int _Unk0) { Invoke<0x77402033, void>(_Unk0); }
 	static void CANCEL_CURRENTLY_PLAYING_AMBIENT_SPEECH(Actor _Actor) { Invoke<0x4DBD473B, void>(_Actor); }
 	static bool IS_AMBIENT_SPEECH_PLAYING(int _Unk0) { return Invoke<0x1972E8AA, int>(_Unk0); }
@@ -664,8 +664,11 @@ namespace AUDIO
 	static void AUDIO_TRIGGER_PLAYER_LOOTING_FEMALE_SPEECH() { Invoke<0x489B3078, void>(); }
 	static void AUDIO_SHUT_OFF_WALLA() { Invoke<0x43C5F320, void>(); }
 	static void AUDIO_TURN_ON_WALLA() { Invoke<0xF7B747CA, void>(); }
-	static void SET_LOCAL_PLAYER_VOICE(int _Unk0) { Invoke<0xF0D28043, void>(_Unk0); }
-	static void SET_LOCAL_PLAYER_PAIN_VOICE(int _Unk0) { Invoke<0x33BD1A80, void>(_Unk0); }
+	static void SET_LOCAL_PLAYER_VOICE(const char* _Name) { Invoke<0xF0D28043, void>(_Name); }
+	static void SET_LOCAL_PLAYER_PAIN_VOICE(const char* _Name) { Invoke<0x33BD1A80, void>(_Name); }
+	static void AUDIO_TURN_OFF_PAIN_VOCALS(Actor _Actor) { Invoke<0x1F7F405C, void>(_Actor); }
+	static void AUDIO_TURN_ON_PAIN_VOCALS(Actor _Actor) { Invoke<0x2B1B76E8, void>(_Actor); }
+	static void AUDIO_TURN_OFF_VOCALS_EFFECTS(Actor _Actor) { Invoke<0xE4D418D1, void>(_Actor); }
 	static void AUDIO_SET_PLAYER_MOOD(int _Unk0, int _Unk1) { Invoke<0xAF6A3160, void>(_Unk0, _Unk1); }
 	static void AUDIO_ALLOW_PREDUEL_SPEECH(int _Unk0) { Invoke<0x94A24A5C, void>(_Unk0); }
 	static void AUDIO_DISALLOW_PREDUEL_SPEECH(int _Unk0) { Invoke<0xD021B37F, void>(_Unk0); }
@@ -735,9 +738,9 @@ namespace AUDIO
 
 namespace BUILTIN
 {
-	static void WAIT(int _Ms) { ScriptWait(_Ms); } // Replaced with our own wait function.
-	static void WAITUNWARPED(int _Ms) { ScriptWait(_Ms); } // Replaced with our own wait function.
-	static void WAITUNPAUSED(int _Ms) { ScriptWait(_Ms); } // Replaced with our own wait function.
+	static void WAIT(int _Ms) { Invoke<0x7715C03B, void>(_Ms); }
+	static void WAITUNWARPED(int _Ms) { Invoke<0x01185F9B, void>(_Ms); }
+	static void WAITUNPAUSED(int _Ms) { Invoke<0x7C496803, void>(_Ms); }
 	static int START_NEW_SCRIPT(const char* _ScriptPath, int _StackSize) { return Invoke<0x3F166D0E, int>(_ScriptPath, _StackSize); }
 	static int START_NEW_SCRIPT_WITH_ARGS(const char* _ScriptPath, int* _Args, int _ArgCount, int _StackSize) { return Invoke<0x4A2100E4, int>(_ScriptPath, _Args, _ArgCount, _StackSize); }
 	static void SETTIMERA(int _Value) { Invoke<0x35785333, void>(_Value); }
@@ -772,7 +775,7 @@ namespace CAM
 	static void CAMERA_RESET(int _Unk0) { Invoke<0xCE956B28, void>(_Unk0); }
 	static bool CAMERA_PROBE(Vector3* Result, Vector3 Source, Vector3 Target, Actor Owner, int Flag) { return Invoke<0x720F2CA7, bool>(Result, Source, Target, Owner, Flag); }
 	static int GET_GAME_CAMERA_RESET_POSITION(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6) { return Invoke<0x0B071844, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6); }
-	static void SET_CAMERA_FOLLOW_ACTOR(Actor actor) { Invoke<0x8EFDFE89, void>(actor); }
+	static void SET_CAMERA_FOLLOW_ACTOR(Actor _Actor) { Invoke<0x8EFDFE89, void>(_Actor); }
 	static int SET_CAMERA_FOLLOW_ACTOR_EX(int _Unk0, int _Unk1) { return Invoke<0x457A0510, int>(_Unk0, _Unk1); }
 	static int GET_LOOKSTICK_INVERT_Y() { return Invoke<0x9B083FD2, int>(); }
 	static void SET_LOOKSTICK_INVERT_Y(int _Unk0) { Invoke<0x063F900A, void>(_Unk0); }
@@ -784,8 +787,8 @@ namespace CAM
 	static int GET_GAME_CAMERA_AUTO_CENTERING_STATE(int _Unk0) { return Invoke<0xE13B49BD, int>(_Unk0); }
 	static void ALLOW_GAME_CAMERA_AUTO_TILTING(int _Unk0, int _Unk1) { Invoke<0x9603D3B2, void>(_Unk0, _Unk1); }
 	static int GET_GAME_CAMERA_AUTO_TILTING_STATE(int _Unk0) { return Invoke<0x4062688A, int>(_Unk0); }
-	static void SET_GAME_CAMERA_FOCUS(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x3AE77125, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
-	static void ENABLE_GAME_CAMERA_FOCUS(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7) { Invoke<0x87E40FB8, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7); }
+	static void SET_GAME_CAMERA_FOCUS(Vector2 _PositionXY, float _PositionZ, bool _Unk) { Invoke<0x3AE77125, void>(_PositionXY, _PositionZ, _Unk); }
+	static void ENABLE_GAME_CAMERA_FOCUS(Vector2 _PositionXY, float _PositionZ, int _Unk2, int _Unk3, bool _Unk4, bool _Unk5, bool _Unk6) { Invoke<0x87E40FB8, void>(_PositionXY, _PositionZ, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6); }
 	static void DISABLE_GAME_CAMERA_FOCUS() { Invoke<0x4FA19C01, void>(); }
 	static int IS_GAME_CAMERA_FOCUS_ENABLED() { return Invoke<0x5BD2295E, int>(); }
 	static int IS_SWITCH_CAMERA_BUTTON_ENABLED() { return Invoke<0xAE168124, int>(); }
@@ -942,7 +945,7 @@ namespace CORE
 	static bool IS_SCRIPT_VALID(int _ScriptId) { return Invoke<0x45F7D589, bool>(_ScriptId); }
 	static bool DOES_SCRIPT_EXIST(const char* _ScriptPath) { return Invoke<0xDEAB87AB, bool>(_ScriptPath); }
 	static bool IS_EXITFLAG_SET() { return Invoke<0x687ECC3C, bool>(); }
-	static bool _IS_GAME_PATH_VALID(const char* _Str) { return Invoke<0x4417C9F2, bool>(_Str); }
+	static bool _IS_ANY_NAMED_SCRIPT_RUNNING(const char* _Str) { return Invoke<0x4417C9F2, bool>(_Str); }
 	static void _TERMINATE_ALL_NAMED_CHILD_SCRIPTS(const char* _Str) { Invoke<0x05719022, void>(_Str); }
 	static void TERMINATE_SCRIPT(int _ScriptId) { Invoke<0x60A7FF09, void>(_ScriptId); }
 	static void ADD_PERSISTENT_SCRIPT(int _ScriptId) { Invoke<0x2F109475, void>(_ScriptId); }
@@ -991,9 +994,9 @@ namespace CORE
 	static float GET_UNWARPED_REALTIME_SECONDS() { return Invoke<0x49F96787, float>(); }
 	static float GET_PROFILE_TIME() { return Invoke<0x6E189771, float>(); }
 	static float GET_LAST_FRAME_TIME() { return Invoke<0x59466B4D, float>(); }
-	static void LOG_MESSAGE(const char* _Message) { Invoke<0x676167C3, void>(_Message); }
-	static void LOG_WARNING(const char* _Message) { Invoke<0xFD25473E, void>(_Message); }
-	static void LOG_ERROR(const char* _Message) { Invoke<0x906C42FD, void>(_Message); }
+	static void _LOG_MESSAGE(const char* _Message) { Invoke<0x676167C3, void>(_Message); }
+	static void _LOG_WARNING(const char* _Message) { Invoke<0xFD25473E, void>(_Message); }
+	static void _LOG_ERROR(const char* _Message) { Invoke<0x906C42FD, void>(_Message); }
 	static Actor GET_TARGET_ACTOR() { return Invoke<0x0EF7427B, Actor>(); }
 	static void GRINGO_SET_TARGET_OBJECT(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x00776356, void>(_Unk0, _Unk1, _Unk2); }
 	static Object GET_TARGET_OBJECT() { return Invoke<0x533AD3F2, Object>(); }
@@ -1285,7 +1288,7 @@ namespace ENTITY
 	static bool IS_ACTOR_ANIMAL(Actor Actor) { return Invoke<0x8E0769F3, bool>(Actor); }
 	static bool IS_ACTOR_CROUCHING(Actor _Actor) { return Invoke<0xF6BF4242, bool>(_Actor); }
 	static int IS_ACTOR_FLYING(int _Unk0) { return Invoke<0x25670955, int>(_Unk0); }
-	static bool IS_ACTOR_HUMAN(int actor) { return Invoke<0x882C84DC, bool>(actor); }
+	static bool IS_ACTOR_HUMAN(Actor _Actor) { return Invoke<0x882C84DC, bool>(_Actor); }
 	static int IS_ACTOR_JUMPING(int _Unk0) { return Invoke<0xDFF96719, int>(_Unk0); }
 	static bool IS_ACTOR_SHOOTING(Actor _Actor) { return Invoke<0x4B441DC4, bool>(_Actor); }
 	static int IS_ACTOR_BLINDFIRING(int _Unk0) { return Invoke<0x6396ABB7, int>(_Unk0); }
@@ -1308,14 +1311,14 @@ namespace ENTITY
 	static void SET_ACTOR_RIDEABLE(Actor Actor, bool Rideable) { Invoke<0x19F3CB6B, void>(Actor, Rideable); }
 	static int GET_VEHICLE_BUMP_COUNT(int _Unk0) { return Invoke<0x04CF7C3E, int>(_Unk0); }
 	static void RESET_VEHICLE_BUMP_COUNT(int _Unk0) { Invoke<0x0E9BA223, void>(_Unk0); }
-	static void SET_CUSTOM_ANIM_SPEED(int _Unk0, int _Unk1) { Invoke<0x5FEA3E61, void>(_Unk0, _Unk1); }
+	static void SET_CUSTOM_ANIM_SPEED(Actor _Actor, int _Speed) { Invoke<0x5FEA3E61, void>(_Actor, _Speed); }
 	static int ACTOR_RESET_ANIMS(int _Unk0, int _Unk1) { return Invoke<0x35D8B4AA, int>(_Unk0, _Unk1); }
 	static int _SCHEDULE_STOP_CUSTOM_UNFREEZE(int _Unk0) { return Invoke<0x817B6952, int>(_Unk0); }
 	static int _SCHEDULE_STOP_CUSTOM_UNSUSPEND(int _Unk0) { return Invoke<0x4A1D2E25, int>(_Unk0); }
 	static int _SCHEDULE_STOP_REPLICATION(int _Unk0) { return Invoke<0xC17BAD12, int>(_Unk0); }
 	static void SET_ACTOR_CAN_PLAY_BORED_IDLES(int _Unk0, int _Unk1) { Invoke<0x0B5E1904, void>(_Unk0, _Unk1); }
 	static void SET_ACTOR_CAN_PLAY_GESTURES(int _Unk0, int _Unk1) { Invoke<0x50ED77F1, void>(_Unk0, _Unk1); }
-	static void ACTOR_ENABLE_VARIABLE_MESH(int _Unk0, int _Unk1, int _Unk2) { Invoke<0xDA2F6203, void>(_Unk0, _Unk1, _Unk2); }
+	static void ACTOR_ENABLE_VARIABLE_MESH(Actor _Actor, int _VariableMesh, bool _Enabled) { Invoke<0xDA2F6203, void>(_Actor, _VariableMesh, _Enabled); }
 	static bool ACTOR_IS_VARIABLE_MESH_ENABLED(Actor _Actor, int _Id) { return Invoke<0x5DE31288, bool>(_Actor, _Id); }
 	static void ACTOR_SET_GRABBED_BY_CUTSCENE(int _Unk0, int _Unk1) { Invoke<0x6D3E430D, void>(_Unk0, _Unk1); }
 	static int ACTOR_IS_GRABBED_BY_CUTSCENE(int _Unk0) { return Invoke<0x776999DB, int>(_Unk0); }
@@ -1351,12 +1354,15 @@ namespace ENTITY
 	static void REPORT_GRINGO_USE_PHASE(int _Unk0, int _Unk1) { Invoke<0xA41B161C, void>(_Unk0, _Unk1); }
 	static void CLEAR_ALL_CORPSES() { Invoke<0x9028B082, void>(); }
 	static bool CAN_PLAYER_DIE() { return Invoke<0x90F9555B, bool>(); }
-	static void CLEAR_ACTOR_MAX_SPEED(int _Unk0) { Invoke<0xA9691E66, void>(_Unk0); }
-	static void SET_ACTOR_MAX_SPEED(Actor _Actor, int _Speed) { Invoke<0x9CB01B27, void>(_Actor, _Speed); }
-	static void SET_ACTOR_MAX_SPEED_ABSOLUTE(Actor _Actor, int _Speed) { Invoke<0x950B8870, void>(_Actor, _Speed); }
-	static void CLEAR_ACTOR_MIN_SPEED(int _Unk0) { Invoke<0x036D75D5, void>(_Unk0); }
-	static void SET_ACTOR_MIN_SPEED(int _Unk0, int _Unk1) { Invoke<0xA854EE99, void>(_Unk0, _Unk1); }
-	static int GET_ACTOR_MAX_SPEED_ABSOLUTE(int _Unk0) { return Invoke<0x56DE7F21, int>(_Unk0); }
+	static void CLEAR_ACTOR_MAX_SPEED(Actor _Actor) { Invoke<0xA9691E66, void>(_Actor); }
+	static void SET_ACTOR_MAX_SPEED(Actor _Actor, int _MaxSpeed) { Invoke<0x9CB01B27, void>(_Actor, _MaxSpeed); }
+	static void SET_ACTOR_MAX_SPEED_ABSOLUTE(Actor _Actor, float _MaxSpeed) { Invoke<0x950B8870, void>(_Actor, _MaxSpeed); }
+	static void CLEAR_ACTOR_MIN_SPEED(Actor _Actor) { Invoke<0x036D75D5, void>(_Actor); }
+	static void SET_ACTOR_MIN_SPEED(Actor _Actor, int _MinSpeed) { Invoke<0xA854EE99, void>(_Actor, _MinSpeed); }
+	static void SET_ACTOR_MIN_SPEED_ABSOLUTE(Actor _Actor, float _MinSpeed) { Invoke<0x04D4A734, void>(_Actor, _MinSpeed); }
+	static int GET_ACTOR_MAX_SPEED(Actor _Actor) { return Invoke<0x627E52EA, int>(_Actor); }
+	static float GET_ACTOR_MAX_SPEED_ABSOLUTE(Actor _Actor) { return Invoke<0x56DE7F21, float>(_Actor); }
+	static int GET_ACTOR_MIN_SPEED(Actor _Actor) { return Invoke<0x8D0DCEB6, int>(_Actor); }
 	static void SET_ACTOR_SPEED(Actor _Actor, float _Speed) { Invoke<0x09D78931, void>(_Actor, _Speed); }
 	static void CLEAR_LAST_ATTACK(int _Unk0) { Invoke<0x68D4A021, void>(_Unk0); }
 	static Actor GET_LAST_ATTACK_TARGET(Actor actor) { return Invoke<0xEB40C2FC, Actor>(actor); }
@@ -1773,8 +1779,8 @@ namespace HEALTH
 	static void SET_ACTOR_KO_POINTS(Actor _Actor, int _Unk1) { Invoke<0x3A2D7759, void>(_Actor, _Unk1); }
 	static int GET_ACTOR_KO_POINTS(Actor _Actor) { return Invoke<0x44787A58, int>(_Actor); }
 	static int GET_ACTOR_MAX_KO_POINTS(Actor _Actor) { return Invoke<0xAFC96669, int>(_Actor); }
-	static void _SET_ACTOR_HEALTH_3(Actor _Actor, float _Health) { Invoke<0x4EEC6628, void>(_Actor, _Health); }
-	static void _SET_ACTOR_HEALTH_4(Actor _Actor, float _Health) { Invoke<0x479B997B, void>(_Actor, _Health); }
+	static void SET_ACTOR_KNOCKOUTTIME(Actor _Actor, float _Time) { Invoke<0x4EEC6628, void>(_Actor, _Time); }
+	static void SET_ACTOR_KNOCKOUTTIME_DEFAULT(Actor _Actor, float _Time) { Invoke<0x479B997B, void>(_Actor, _Time); }
 	static bool IS_ACTOR_DRUNK(Actor _Actor) { return Invoke<0xFF07D58C, bool>(_Actor); }
 	static void SET_ACTOR_DRUNK(Actor _Actor, bool _IsDrunk) { Invoke<0x9F57742C, void>(_Actor, _IsDrunk); }
 	static void SET_ACTOR_PASSED_OUT(Actor _Actor, int _Unk1) { Invoke<0x2A9FD09F, void>(_Actor, _Unk1); }
@@ -1786,7 +1792,7 @@ namespace HEALTH
 namespace HOLSTER
 {
 	static int ACTOR_HOLSTER_WEAPON(int _Unk0, int _Unk1) { return Invoke<0xFE9903CC, int>(_Unk0, _Unk1); }
-	static int ACTOR_START_FORCE_HOLSTER(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x7957CA4F, int>(_Unk0, _Unk1, _Unk2); }
+	static int ACTOR_START_FORCE_HOLSTER(Actor _Actor, int _Unk1, int _Unk2) { return Invoke<0x7957CA4F, int>(_Actor, _Unk1, _Unk2); }
 	static int ACTOR_END_FORCE_HOLSTER(int _Unk0) { return Invoke<0x231E7034, int>(_Unk0); }
 	static int ACTOR_DRAW_LAST_WEAPON(int _Unk0, int _Unk1) { return Invoke<0x8FFDCE5C, int>(_Unk0, _Unk1); }
 	static int ACTOR_DRAW_ANY_WEAPON(int _Unk0, int _Unk1) { return Invoke<0xD86BFBD8, int>(_Unk0, _Unk1); }
@@ -1817,7 +1823,7 @@ namespace HUD
 	static void PRINT_SMALL_B(const char* _Message, float _Time, bool _IsLiteral, int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x4A38C60, void>(_Message, _Time, _IsLiteral, _Unk0, _Unk1, _Unk2, _Unk3); }
 	static void PRINT_HELP_B(const char* _Text, float _Time, bool _IsLiteral, int _PrintType, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { Invoke<0xE42A8278, void>(_Text, _Time, _IsLiteral, _PrintType, _Unk1, _Unk2, _Unk3, _Unk4); }
 	static void PRINT_OBJECTIVE_B(const char* _Text, float _Time, bool _IsLiteral, int _PrintType, int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x32394BB6, void>(_Text, _Time, _IsLiteral, _PrintType, _Unk0, _Unk1, _Unk2, _Unk3); }
-	static void PRINT_MONEY(const char* _Message, int _Unk0, int _Unk1, float _Time, int _Unk4, const char* _Unk5) { Invoke<0x51948EA6, void>(_Message, _Unk0, _Unk1, _Time, _Unk4, _Unk5); }
+	static void PRINT_MONEY(const char* _GXTEntry, int _Value, int _AdditionalValue, float _Time, float _Unk4, const char* _Unk5) { Invoke<0x51948EA6, void>(_GXTEntry, _Value, _AdditionalValue, _Time, _Unk4, _Unk5); }
 	static void PRINT_BIG_FORMAT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7) { Invoke<0xBCB8D17F, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7); }
 	static void PRINT_SMALL_FORMAT(const char* _Text1, const char* _Text2, const char* _Text3, const char* _Text4, const char* _Text5, const char* _Text6, int _Unk0, bool _Unk1, int _Unk2) { Invoke<0xBBBDFF7C, void>(_Text1, _Text2, _Text3, _Text4, _Text5, _Text6, _Unk0, _Unk1, _Unk2); }
 	static void PRINT_OBJECTIVE_FORMAT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8, int _Unk9, int _Unk10) { Invoke<0x283B4EFC, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8, _Unk9, _Unk10); }
@@ -1836,23 +1842,23 @@ namespace HUD
 	static void HUD_CLEAR_BIG_TEXT_QUEUE() { Invoke<0x777A1CA2, void>(); }
 	static void HUD_CLEAR_OBJECTIVE_QUEUE() { Invoke<0xE4DACF40, void>(); }
 	static void HUD_CLEAR_HELP_QUEUE() { Invoke<0x495164AD, void>(); }
-	static Blip ADD_BLIP_FOR_ACTOR(Actor _Actor, BlipId _BlipId, float _Unk0, bool _Unk1, int _Unk2) { return Invoke<0xEFB9362F, Blip>(_Actor, _BlipId, _Unk0, _Unk1, _Unk2); }
-	static Blip ADD_BLIP_FOR_OBJECT(Object _Object, BlipId _BlipId, float _Unk0, bool _Unk1, int _Unk2) { return Invoke<0x0E5372EC, Blip>(_Object, _BlipId, _Unk0, _Unk1, _Unk2); }
-	static Blip ADD_BLIP_FOR_COORD(Vector3* _Position, BlipId _BlipId, float _Unk0, bool _Unk1, int _Unk2) { return Invoke<0xC6F43D0E, Blip>(_Position, _BlipId, _Unk0, _Unk1, _Unk2); }
-	static void CHANGE_BLIP_ICON(int _Unk0, int _Unk1) { Invoke<0xABD125F6, void>(_Unk0, _Unk1); }
-	static void SET_BLIP_POS(Blip _Blip, Vector3 _Position) { Invoke<0xB2EAF8DD, void>(_Blip, _Position); }
+	static Blip ADD_BLIP_FOR_ACTOR(Actor _Actor, BlipIcon _BlipIcon, float _Unk0, bool _Unk1, int _Unk2) { return Invoke<0xEFB9362F, Blip>(_Actor, _BlipIcon, _Unk0, _Unk1, _Unk2); }
+	static Blip ADD_BLIP_FOR_OBJECT(Object _Object, BlipIcon _BlipIcon, float _Unk0, bool _Unk1, int _Unk2) { return Invoke<0x0E5372EC, Blip>(_Object, _BlipIcon, _Unk0, _Unk1, _Unk2); }
+	static Blip ADD_BLIP_FOR_COORD(Vector3* _Position, BlipIcon _BlipIcon, float _Unk0, bool _Unk1, int _Unk2) { return Invoke<0xC6F43D0E, Blip>(_Position, _BlipIcon, _Unk0, _Unk1, _Unk2); }
+	static void CHANGE_BLIP_ICON(Blip _Blip, BlipIcon _BlipIcon) { Invoke<0xABD125F6, void>(_Blip, _BlipIcon); }
+	static void SET_BLIP_POS(Blip _Blip, Vector3* _Position) { Invoke<0xB2EAF8DD, void>(_Blip, _Position); }
 	static void SET_BLIP_SCALE(Blip _Blip, float _Scale) { Invoke<0x1E6EC434, void>(_Blip, _Scale); }
 	static void SET_BLIP_COLOR(Blip _Blip, float _R, float _G, float _B, float _A) { Invoke<0xA2B8A736, void>(_Blip, _R, _G, _B, _A); }
 	static void SET_BLIP_PRIORITY(Blip _Blip, int _Priority) { Invoke<0xCE87DA6F, void>(_Blip, _Priority); }
-	static void SET_BLIP_BLINK(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x04B8C8C6, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
-	static void SET_BLIP_FLAG(int _Unk0, int _Unk1, int _Unk2) { Invoke<0xA9A01C70, void>(_Unk0, _Unk1, _Unk2); }
+	static void SET_BLIP_BLINK(Blip _Blip, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x04B8C8C6, void>(_Blip, _Unk1, _Unk2, _Unk3); }
+	static void SET_BLIP_FLAG(Blip _Blip, int _Unk1, int _Unk2) { Invoke<0xA9A01C70, void>(_Blip, _Unk1, _Unk2); }
 	static void SET_BLIP_VISIBLE(Blip _Blip, bool _Visible) { Invoke<0x9318D3D2, void>(_Blip, _Visible); }
 	static bool IS_BLIP_VISIBLE(Blip _Blip) { return Invoke<0x1E7A6623, bool>(_Blip); }
 	static bool IS_BLIP_VALID(Blip _Blip) { return Invoke<0xDCC10BA9, bool>(_Blip); }
 	static void REMOVE_BLIP(Blip _Blip) { Invoke<0xD8C3C1CD, void>(_Blip); }
 	static Blip GET_BLIP_ON_ACTOR(Actor _Actor) { return Invoke<0x1449EE9E, Blip>(_Actor); }
 	static Blip GET_BLIP_ON_OBJECT(Object Obj) { return Invoke<0xE3E30992, Blip>(Obj); }
-	static int GET_BLIP_ICON(int _Unk0) { return Invoke<0xEE4F4B7D, int>(_Unk0); }
+	static BlipIcon GET_BLIP_ICON(Blip _Blip) { return Invoke<0xEE4F4B7D, BlipIcon>(_Blip); }
 	static int SET_CURRENT_MAP(int _Unk0) { return Invoke<0x014C7C29, int>(_Unk0); }
 	static void SET_STAMINA_BLINK(int _Unk0) { Invoke<0x39F2E5F1, void>(_Unk0); }
 	static void SET_DEADEYE_BLINK(int _Unk0) { Invoke<0xA543B120, void>(_Unk0); }
@@ -1863,12 +1869,12 @@ namespace HUD
 	static void ABORT_HUD_MAP_SCALE_OVERRIDE() { Invoke<0x33CE49C9, void>(); }
 	static void _0x2148AC15(int _Unk0, int _Unk1) { Invoke<0x2148AC15, void>(_Unk0, _Unk1); }
 	static void _0x444C3C32(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x444C3C32, void>(_Unk0, _Unk1, _Unk2); }
-	static void SET_BLIP_HUDMAP_ONLY(int _Unk0, int _Unk1) { Invoke<0x1E98AFEC, void>(_Unk0, _Unk1); }
-	static void SET_BLIP_PAUSEMAP_ONLY(int _Unk0, int _Unk1) { Invoke<0xFF3DB575, void>(_Unk0, _Unk1); }
+	static void SET_BLIP_HUDMAP_ONLY(Blip _Blip, bool _Toggle) { Invoke<0x1E98AFEC, void>(_Blip, _Toggle); }
+	static void SET_BLIP_PAUSEMAP_ONLY(Blip _Blip, bool _Toggle) { Invoke<0xFF3DB575, void>(_Blip, _Toggle); }
 	static int GET_BLIP_IMPAIRMENT_MASK(int _Unk0) { return Invoke<0xD76F1E9A, int>(_Unk0); }
 	static void SET_BLIP_IMPAIRMENT_MASK(int _Unk0, int _Unk1) { Invoke<0xBC05EBB3, void>(_Unk0, _Unk1); }
-	static void SET_BLIP_MAX_DISTANCE(int _Unk0, int _Unk1) { Invoke<0xCE79F8E2, void>(_Unk0, _Unk1); }
-	static void SET_BLIP_MIN_DISTANCE(int _Unk0, int _Unk1) { Invoke<0xFBA76D7E, void>(_Unk0, _Unk1); }
+	static void SET_BLIP_MAX_DISTANCE(Blip _Blip, float _MaxDistance) { Invoke<0xCE79F8E2, void>(_Blip, _MaxDistance); }
+	static void SET_BLIP_MIN_DISTANCE(Blip _Blip, float _MinDistance) { Invoke<0xFBA76D7E, void>(_Blip, _MinDistance); }
 	static void _SET_BLIP_HEIGHT_ENABLED(int _Unk0, int _Unk1) { Invoke<0x6077F3AE, void>(_Unk0, _Unk1); }
 	static void SET_BLIP_NAME(Blip _Blip, const char* _GXTEntry) { Invoke<0xDC249B12, void>(_Blip, _GXTEntry); }
 	static void CLEAR_REGIONS() { Invoke<0xB1DAEF0C, void>(); }
@@ -1884,15 +1890,15 @@ namespace HUD
 	static void HUD_CLEAR_SHOOT_BLIP_ICON_FOR_ACTOR(int _Unk0) { Invoke<0x5EA2E02D, void>(_Unk0); }
 	static int HUD_GET_SHOOT_BLIP_ICON_FOR_ACTOR(int _Unk0) { return Invoke<0xE78A0469, int>(_Unk0); }
 	static void HUD_SET_SHOOT_BLIP_ICON_FOR_ACTOR(int _Unk0, int _Unk1) { Invoke<0x02755628, void>(_Unk0, _Unk1); }
-	static void SET_STAT_MESSAGE(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8, int _Unk9, int _Unk10, int _Unk11, int _Unk12) { Invoke<0x73DA6AF1, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8, _Unk9, _Unk10, _Unk11, _Unk12); }
+	static void SET_STAT_MESSAGE(int _Unk0, const char* _Unk1, float _Unk2, const char* _Unk3, int _Unk4, float _Unk5, int _Unk6, int _Unk7, int _Unk8, int _Unk9, int _Unk10, int _Unk11, int _Unk12) { Invoke<0x73DA6AF1, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8, _Unk9, _Unk10, _Unk11, _Unk12); }
 	static void CLEAR_STAT_MESSAGE() { Invoke<0x906E0138, void>(); }
 	static int IS_STAT_MESSAGE_SHOWING() { return Invoke<0x919142BE, int>(); }
 	static void HUD_TIMER_DISPLAY(int _Unk0) { Invoke<0x149F9E46, void>(_Unk0); }
 	static int HUD_TIMER_GET() { return Invoke<0x1C6919EF, int>(); }
 	static void HUD_TIMER_COUNTDOWN(int _Unk0) { Invoke<0xF4209CCC, void>(_Unk0); }
 	static void HUD_TIMER_PAUSE() { Invoke<0x3383E839, void>(); }
-	static void _HUD_WANTED_METER(int _Unk0) { Invoke<0x31A55281, void>(_Unk0); }
-	static void _HUD_WANTED_CRIME(int _Unk0) { Invoke<0x651C1FC2, void>(_Unk0); }
+	static void WANTEDFX_ENABLED(bool _Toggle) { Invoke<0x31A55281, void>(_Toggle); }
+	static void WANTEDFX_SET_LEVEL(float _Level) { Invoke<0x651C1FC2, void>(_Level); }
 	static void HUD_COUNTER_DISPLAY(int _Unk0) { Invoke<0x9A35DFC6, void>(_Unk0); }
 	static void HUD_COUNTER_SET(int _Unk0) { Invoke<0x7D94675D, void>(_Unk0); }
 	static void HUD_ENABLE(bool _Value) { Invoke<0x0C180A3F, void>(_Value); }
@@ -1942,6 +1948,8 @@ namespace HUD
 	static void HUD_SET_CENTER_BLIP_SHOWN(int _Unk0) { Invoke<0xEB214384, void>(_Unk0); }
 	static bool IS_DLC_ZOMBIEPACK_ACTIVE() { return Invoke<0x6CC9CCE7, bool>(); }
 	static bool IS_HARDCORE_ACTIVE() { return Invoke<0x8701F1F6, bool>(); }
+	static void _HUD_SET_ZOMBIE_THEME() { Invoke<0x3842B89F, void>(); }
+	static void _HUD_SET_NORMAL_THEME() { Invoke<0xFDB5FC03, void>(); }
 }
 
 namespace INDICATOR
@@ -2001,9 +2009,9 @@ namespace INVENTORY
 	static int GET_WEAPON_IN_HAND_CRC(int _Unk0) { return Invoke<0x0CDD6F94, int>(_Unk0); }
 	static int GET_WEAPON_ENUM_FROM_CRC(int _Unk0) { return Invoke<0x2776B0F5, int>(_Unk0); }
 	static void SET_EQUIP_SLOT_ENABLED(int _Unk0, int _Unk1, int _Unk2) { Invoke<0xE6604B39, void>(_Unk0, _Unk1, _Unk2); }
-	static void EQUIP_ACCESSORY(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x5A80659D, void>(_Unk0, _Unk1, _Unk2); }
-	static void DEEQUIP_ACCESSORY(int _Unk0, int _Unk1) { Invoke<0xF7696B8B, void>(_Unk0, _Unk1); }
-	static int HAS_ACCESSORY_ENUM(int _Unk0, int _Unk1) { return Invoke<0x9B958A25, int>(_Unk0, _Unk1); }
+	static void EQUIP_ACCESSORY(Actor _Actor, AccessoryModel _AccessoryModel, int _Unk2) { Invoke<0x5A80659D, void>(_Actor, _AccessoryModel, _Unk2); }
+	static void DEEQUIP_ACCESSORY(Actor _Actor, AccessoryModel _AccessoryModel) { Invoke<0xF7696B8B, void>(_Actor, _AccessoryModel); }
+	static bool HAS_ACCESSORY_ENUM(Actor _Actor, AccessoryModel _AccessoryModel) { return Invoke<0x9B958A25, bool>(_Actor, _AccessoryModel); }
 	static bool IS_ACCESSORY_EQUIPPPED(Actor _Actor, int _Accessory) { return Invoke<0xE094DB31, bool>(_Actor, _Accessory); }
 	static int DROP_ACCESSORY_ENUM(int _Unk0, int _Unk1) { return Invoke<0x7FDDF876, int>(_Unk0, _Unk1); }
 	static void ACTOR_SET_WEAPON_AMMO(Actor _Actor, WeaponModel _WeaponModel, float _AmmoCount) { Invoke<0x8266C617, void>(_Actor, _WeaponModel, _AmmoCount); }
@@ -2013,18 +2021,18 @@ namespace INVENTORY
 	static float ACTOR_GET_WEAPON_AMMO(Actor _Actor, WeaponModel _WeaponModel) { return Invoke<0x43DEDFAE, float>(_Actor, _WeaponModel); }
 	static void ACTOR_DISCARD_WEAPON_AMMO(Actor _Actor, WeaponModel _WeaponModel) { Invoke<0xEEC81873, void>(_Actor, _WeaponModel); }
 	static bool ACTOR_HAS_VARIABLE_MESH(Actor _Actor, int _Id) { return Invoke<0xA091179F, bool>(_Actor, _Id); }
-	static int GET_AMMOENUM_FOR_WEAPONENUM(int _Unk0) { return Invoke<0x17883570, int>(_Unk0); }
-	static int GET_WEAPONENUM_FOR_AMMOENUM(int _Unk0, int _Unk1) { return Invoke<0xA8F64D32, int>(_Unk0, _Unk1); }
+	static AmmoType GET_AMMOENUM_FOR_WEAPONENUM(WeaponModel _WeaponModel) { return Invoke<0x17883570, AmmoType>(_WeaponModel); }
+	static WeaponModel GET_WEAPONENUM_FOR_AMMOENUM(Actor _Actor, AmmoType _AmmoType) { return Invoke<0xA8F64D32, WeaponModel>(_Actor, _AmmoType); }
 	static void SET_WEAPON_GOLD(Actor _Actor, WeaponModel _WeaponModel, bool _Gold) { Invoke<0xAE44869D, void>(_Actor, _WeaponModel, _Gold); }
 	static bool GET_WEAPON_GOLD(Actor _Actor, WeaponModel _WeaponModel) { return Invoke<0x6DBD1DDB, bool>(_Actor, _WeaponModel); }
 	static bool IS_GOLDEN_GUNS_ON() { return Invoke<0x80B30545, bool>(); }
 	static void FIRE_PROJECTILE(Actor Actor, const char* WeapGroup, float _Unk2, Vector3* Origin, Vector3* Target) { Invoke<0x195A4286, void>(Actor, WeapGroup, _Unk2, Origin, Target); }
-	static void ACTOR_ADD_INV_AMMO(Actor _Actor, int _AmmoType, float _AmmoCount, bool _Unk0, bool _Notify) { Invoke<0x98B3ABFA, void>(_Actor, _AmmoType, _AmmoCount, _Unk0, _Notify); }
-	static void ACTOR_SET_INV_AMMO(Actor _Actor, int _AmmoType, float _AmmoCount, bool _Unk0) { Invoke<0x4372593E, void>(_Actor, _AmmoType, _AmmoCount, _Unk0); }
+	static void ACTOR_ADD_INV_AMMO(Actor _Actor, AmmoType _AmmoType, float _AmmoCount, bool _Unk0, bool _Notify) { Invoke<0x98B3ABFA, void>(_Actor, _AmmoType, _AmmoCount, _Unk0, _Notify); }
+	static void ACTOR_SET_INV_AMMO(Actor _Actor, AmmoType _AmmoType, float _AmmoCount, bool _Unk0) { Invoke<0x4372593E, void>(_Actor, _AmmoType, _AmmoCount, _Unk0); }
 	static void ACTOR_SET_INV_AMMO_MAX_AMOUNT(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x6ADAAD87, void>(_Unk0, _Unk1, _Unk2); }
 	static void ACTOR_SET_INV_AMMO_INFINITE(Actor _Actor, WeaponModel _WeaponModel, bool _Infinite) { Invoke<0x4FE2B586, void>(_Actor, _WeaponModel, _Infinite); }
-	static int IS_FRONTEND_DEATH(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0xE224AC6F, int>(_Unk0, _Unk1, _Unk2); }
-	static int ACTOR_GET_INV_AMMO_MAX_AMOUNT(int _Unk0, int _Unk1) { return Invoke<0x7AB368CF, int>(_Unk0, _Unk1); }
+	static float ACTOR_GET_INV_AMMO(Actor _Actor, AmmoType _AmmoType, bool _Unk) { return Invoke<0xE224AC6F, float>(_Actor, _AmmoType, _Unk); }
+	static float ACTOR_GET_INV_AMMO_MAX_AMOUNT(Actor _Actor, AmmoType _AmmoType) { return Invoke<0x7AB368CF, float>(_Actor, _AmmoType); }
 	static bool ACTOR_GET_INV_AMMO_INFINITE(Actor _Actor, WeaponModel _WeaponModel) { return Invoke<0xC666B987, bool>(_Actor, _WeaponModel); }
 	static void ACTOR_SHOULD_DROP_ITEMS_ON_DEATH(int _Unk0, int _Unk1, int _Unk2) { Invoke<0xBE39208A, void>(_Unk0, _Unk1, _Unk2); }
 	static void ACTOR_SET_DROP_ITEM_ON_DEATH_ENUMERATED(int _Unk0, int _Unk1, int _Unk2) { Invoke<0xBC46E3E1, void>(_Unk0, _Unk1, _Unk2); }
@@ -2578,19 +2586,19 @@ namespace OBJECT
 	static void CLEAR_AMBIENT_OBJECTS_VOLUME(int _Unk0, int _Unk1) { Invoke<0xBB77E597, void>(_Unk0, _Unk1); }
 	static Vector3 GET_OBJECT_POSITION(Object _Object) { Vector3 position; Invoke<0x31201B4C, bool>(_Object, &position); return position; }
 	static int ROTATE_OBJECT_AROUND_AXIS(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x3C45D66A, int>(_Unk0, _Unk1, _Unk2); }
-	static bool GET_OBJECT_AXIS(Object _Object, Vector3* _Axis) { return Invoke<0xCE412E46, bool>(_Object, _Axis); }
+	static bool GET_OBJECT_AXIS(Object _Object, Vector3* _Axis, int _RotationOrder) { return Invoke<0xCE412E46, bool>(_Object, _Axis, _RotationOrder); }
 	static bool GET_OBJECT_RELATIVE_POSITION(Object _Object, Vector3* _Input, int _Unused, Vector3* _Output) { return Invoke<0x2243EA59, bool>(_Object, _Input, _Unused, _Output); }
 	static bool GET_OBJECT_RELATIVE_OFFSET(Object _Object, Vector3* _Input, int _Unused, Vector3* _Output) { return Invoke<0x15CDF203, bool>(_Object, _Input, _Unused, _Output); }
 	static bool GET_OBJECT_RELATIVE_ORIENTATION(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { return Invoke<0x919583DC, bool>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
 	static int GET_OBJECT_RELATIVE_ORIENTATION_IN_OBJECT_SPACE(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { return Invoke<0x6689F85C, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
 	static int PREPARE_CORPSE_FOR_ANIMAL_CONSUMPTION(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { return Invoke<0xFC718FC5, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static int GET_POSITION_OBJECT_SPACE(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { return Invoke<0x663F1464, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
-	static bool GET_OBJECT_ORIENTATION(Object _Object, Vector3* _Rotation) { return Invoke<0x27B7D6D6, bool>(_Object, _Rotation); }
+	static Vector3 GET_OBJECT_ORIENTATION(Object _Object) { Vector3 rotation; Invoke<0x27B7D6D6, bool>(_Object, &rotation); return rotation; }
 	static float GET_OBJECT_HEADING(Object _Object) { return Invoke<0x1C02D2F8, float>(_Object); }
 	static bool SET_OBJECT_POSITION(Object _Object, Vector2 _PositionXY, float _PositionZ) { return Invoke<0xC5D796F8, bool>(_Object, _PositionXY, _PositionZ); }
 	static void SET_OBJECT_POSITION_ON_GROUND(Object _Object, Vector2 _PositionXY, float _PositionZ) { Invoke<0x5AB0BBA6, void>(_Object, _PositionXY, _PositionZ); }
 	static bool SET_OBJECT_ORIENTATION(Object _Object, Vector2 _OrientationXY, float _OrientationZ) { return Invoke<0xC8A4EE74, bool>(_Object, _OrientationXY, _OrientationZ); }
-	static int SNAP_OBJECT_TO_GROUND(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { return Invoke<0xF437B3D9, int>(_Unk0, _Unk1, _Unk2, _Unk3); }
+	static int SNAP_OBJECT_TO_GROUND(Object _Object, float _Unk1, float _Unk2, float _Unk3) { return Invoke<0xF437B3D9, int>(_Object, _Unk1, _Unk2, _Unk3); }
 	static bool GET_OBJECT_NAMED_BONE_POSITION(Object _Object, const char* _BoneName, Vector3* _Position) { return Invoke<0x30516389, bool>(_Object, _BoneName, _Position); }
 	static int GET_OBJECT_NAMED_BONE_ORIENTATION(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0xCAD543AD, int>(_Unk0, _Unk1, _Unk2); }
 	static int TELEPORT_OBJECT_TO_OBJECT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8) { return Invoke<0x8C0E3E29, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
@@ -2628,28 +2636,29 @@ namespace OBJECT
 	static int IS_ACTORENUM_INSTALLED(int _Unk0) { return Invoke<0x9B903F45, int>(_Unk0); }
 	static void SET_LOCK_OFFSET_ACTORENUM_ANIMAL(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6) { Invoke<0xC741F051, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6); }
 	static Actor CREATE_ACTOR_IN_LAYOUT(Layout _Layout, const char* _ActorName, ActorModel _Model, Vector2 _PositionXY, float _PositionZ, Vector2 _RotationXY, float _RotationZ) { return Invoke<0x8D67F397, Actor>(_Layout, _ActorName, _Model, _PositionXY, _PositionZ, _RotationXY, _RotationZ); }
-	static int CREATE_PLAYER_ACTOR_IN_LAYOUT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8, int _Unk9) { return Invoke<0x6A307D5F, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8, _Unk9); }
+	static Actor CREATE_PLAYER_ACTOR_IN_LAYOUT(Layout _Layout, const char* _ActorName, ActorModel _Model, Vector2 _PositionXY, float _PositionZ, Vector2 _RotationXY, float _RotationZ, int _OutfitVariation) { return Invoke<0x6A307D5F, Actor>(_Layout, _ActorName, _Model, _PositionXY, _PositionZ, _RotationXY, _RotationZ, _OutfitVariation); }
 	static int CREATE_PERS_CHAR_IN_LAYOUT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6) { return Invoke<0x013B3937, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6); }
 	static Actor RESPAWN_PLAYER_ACTOR_IN_LAYOUT(Layout _Layout, Actor _Actor, const char* _ActorInLayout, ActorModel _Model, Vector2 _PositionXY, float _PositionZ, Vector2 _RotationXY, float _RotationZ, int _Unk0) { return Invoke<0x637E446B, Actor>(_Layout, _Actor, _ActorInLayout, _Model, _PositionXY, _PositionZ, _RotationXY, _RotationZ, _Unk0); }
 	static int IS_ACTOR_INITED(int _Unk0) { return Invoke<0x24F4DAB2, int>(_Unk0); }
 	static ActorModel GET_ACTOR_ENUM(Actor _Actor) { return Invoke<0x0B28E9EC, ActorModel>(_Actor); }
-	static int GET_ACTOR_ENUM_STRING(int _Unk0) { return Invoke<0xD98CB6F6, int>(_Unk0); }
-	static int GET_ACTOR_ENUM_FROM_STRING(int _Unk0) { return Invoke<0xC739D1D2, int>(_Unk0); }
-	static int GET_ACTOR_ENUM_STRING_FROM_ENUM(int _Unk0) { return Invoke<0x990614C1, int>(_Unk0); }
+	static const char* GET_ACTOR_ENUM_STRING(Actor _Actor) { return Invoke<0xD98CB6F6, const char*>(_Actor); }
+	static ActorModel GET_ACTOR_ENUM_FROM_STRING(const char* _EnumStr) { return Invoke<0xC739D1D2, ActorModel>(_EnumStr); }
+	static const char* GET_ACTOR_ENUM_STRING_FROM_ENUM(ActorModel _Model) { return Invoke<0x990614C1, const char*>(_Model); }
 	static int GET_ACTOR_ENUM_VARIATION_COUNT(ActorModel _Model) { return Invoke<0xB50E95D7, int>(_Model); }
-	static int GET_ACTOR_ENUM_FACTION(int _Unk0) { return Invoke<0x2803BDA8, int>(_Unk0); }
+	static int GET_ACTOR_ENUM_FACTION(ActorModel _Model) { return Invoke<0x2803BDA8, int>(_Model); }
 	static void SWITCH_ACTOR_ENUM_VARIATION(Actor _Actor, int _VariationId) { Invoke<0x7AB17813, void>(_Actor, _VariationId); }
 	static void SWITCH_PLAYER_TO_ENUM(ActorModel _Model, int _VariationId) { Invoke<0x95FBA0B0, void>(_Model, _VariationId); }
 	static void TURN_ACTOR_INTO_ZOMBIE(Actor _Actor, ActorModel _Model) { Invoke<0x39928706, void>(_Actor, _Model); }
 	static void SET_ACTOR_HARD_LOCK_AQUIRE_BONE_CASUAL(Actor _Actor, const char* _BoneName) { Invoke<0x12A86E9D, void>(_Actor, _BoneName); }
 	static void SET_ACTOR_HARD_LOCK_AQUIRE_BONE(Actor _Actor, const char* _BoneName) { Invoke<0x5613615B, void>(_Actor, _BoneName); }
-	static int REQUEST_ASSET(const char* AssetDir, AssetType _AssetType) { return Invoke<0x9AA02DA7, int>(AssetDir, _AssetType); }
+	static int GET_CURRENT_ACTOR_ENUM_VARIATION(Actor _Actor) { return Invoke<0xB54567B9, int>(_Actor); }
+	static int REQUEST_ASSET(const char* _AssetDir, AssetType _AssetType) { return Invoke<0x9AA02DA7, int>(_AssetDir, _AssetType); }
 	static int GET_ASSET_ID(const char* _AssetPath, AssetType _AssetType) { return Invoke<0x6005B514, int>(_AssetPath, _AssetType); }
 	static int REMOVE_ASSET(int _Unk0, int _Unk1) { return Invoke<0xE7829D28, int>(_Unk0, _Unk1); }
-	static int _GET_TYPE_ID_USING_ACTOR_ENUM(int _Unk0, int _Unk1) { return Invoke<0x55E6227E, int>(_Unk0, _Unk1); }
+	static int AE_GET_ASSET_ID(int _Unk0, int _Unk1) { return Invoke<0x55E6227E, int>(_Unk0, _Unk1); }
 	static int GET_ASSET_NAME(int _Unk0, int _Unk1) { return Invoke<0x9EDBBB84, int>(_Unk0, _Unk1); }
 	static int IS_ASSETTYPEID_VALID(int _Unk0) { return Invoke<0x214AFB8C, int>(_Unk0); }
-	static int _IS_TYPE_ID_VALID_BY_STRING(int _Unk0, int _Unk1) { return Invoke<0xFDF42AAC, int>(_Unk0, _Unk1); }
+	static int IS_ASSETTYPEID_VALID_BY_STRING(int _Unk0, int _Unk1) { return Invoke<0xFDF42AAC, int>(_Unk0, _Unk1); }
 	static int GET_CORPSE_ACTOR_ENUM(int _Unk0) { return Invoke<0x1FCC8FEF, int>(_Unk0); }
 	static int GET_PREVIOUS_ACTOR_FROM_CORPSE(int _Unk0) { return Invoke<0xAF2597E8, int>(_Unk0); }
 	static int REQUEST_ARTICULATED_CORPSE(int _Unk0) { return Invoke<0x97951004, int>(_Unk0); }
@@ -2657,9 +2666,9 @@ namespace OBJECT
 	static void SET_PROP_COLLIDE_WITH_WORLD(int _Unk0, int _Unk1) { Invoke<0xCEC355CE, void>(_Unk0, _Unk1); }
 	static void SET_PROP_COLLIDE_WITH_MOVABLES(int _Unk0, int _Unk1) { Invoke<0x418A22D5, void>(_Unk0, _Unk1); }
 	static void SET_PROP_COLLIDE_WITH_OBJECT(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x77403213, void>(_Unk0, _Unk1, _Unk2); }
-	static void SET_OBJECT_COLLIDE_WITH_WORLD(int _Unk0, int _Unk1) { Invoke<0x601FC9F4, void>(_Unk0, _Unk1); }
-	static void SET_OBJECT_COLLIDE_WITH_MOVABLES(int _Unk0, int _Unk1) { Invoke<0x05D69EA6, void>(_Unk0, _Unk1); }
-	static void SET_OBJECT_COLLIDE_WITH_OBJECT(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x9AC1CA75, void>(_Unk0, _Unk1, _Unk2); }
+	static void SET_OBJECT_COLLIDE_WITH_WORLD(Object _Object, bool _Collide) { Invoke<0x601FC9F4, void>(_Object, _Collide); }
+	static void SET_OBJECT_COLLIDE_WITH_MOVABLES(Object _Object, bool _Collide) { Invoke<0x05D69EA6, void>(_Object, _Collide); }
+	static void SET_OBJECT_COLLIDE_WITH_OBJECT(Object _Object, bool _Collide, int _Unk2) { Invoke<0x9AC1CA75, void>(_Object, _Collide, _Unk2); }
 	static int SET_PROP_AI_OBSTACLE_ENABLED(int _Unk0, int _Unk1) { return Invoke<0x0DC83543, int>(_Unk0, _Unk1); }
 	static int GET_CURVE_FROM_OBJECT(int _Unk0) { return Invoke<0x49D0DF2E, int>(_Unk0); }
 	static void DESTROY_CURVEQUERY(int _Unk0) { Invoke<0xDF93BD7C, void>(_Unk0); }
@@ -2898,7 +2907,8 @@ namespace PROP
 	static void SET_DRAW_OBJECT(int _Unk0, int _Unk1) { Invoke<0xC5A886DC, void>(_Unk0, _Unk1); }
 	static int PROP_IS_VARIABLE_MESH_ENABLED(int _Unk0, int _Unk1) { return Invoke<0x375A33F0, int>(_Unk0, _Unk1); }
 	static int PROP_ENABLE_VARIABLE_MESH(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x8287F8B3, int>(_Unk0, _Unk1, _Unk2); }
-	static int SET_PROP_REMAP(int _Unk0, int _Unk1) { return Invoke<0x4BCFADB1, int>(_Unk0, _Unk1); }
+	static bool SET_PROP_REMAP(const char* _Src, const char* _Dst) { return Invoke<0x4BCFADB1, bool>(_Src, _Dst); }
+	static bool CLEAR_PROP_REMAP(const char* _Src) { return Invoke<0x6D555332, bool>(_Src); }
 }
 
 namespace RENDER
@@ -2910,26 +2920,27 @@ namespace RENDER
 
 namespace RIDING
 {
-	static void SET_MOST_RECENT_MOUNT(int _Unk0, int _Unk1) { Invoke<0x00AF2CB0, void>(_Unk0, _Unk1); }
-	static int GET_MOST_RECENT_MOUNT(int _Unk0) { return Invoke<0x708E450F, int>(_Unk0); }
-	static int GET_MOST_RECENT_RIDER(int _Unk0) { return Invoke<0x668E55C3, int>(_Unk0); }
-	static int IS_ACTOR_HORSE(int _Unk0) { return Invoke<0xDB0D0478, int>(_Unk0); }
-	static int IS_ACTOR_MULE(int _Unk0) { return Invoke<0x1F739295, int>(_Unk0); }
+	static void SET_MOST_RECENT_MOUNT(Actor _Actor, Actor _Mount) { Invoke<0x00AF2CB0, void>(_Actor, _Mount); }
+	static Actor GET_MOST_RECENT_MOUNT(Actor _Actor) { return Invoke<0x708E450F, Actor>(_Actor); }
+	static Actor GET_MOST_RECENT_RIDER(Actor _Actor) { return Invoke<0x668E55C3, Actor>(_Actor); }
+	static bool IS_ACTOR_HORSE(Actor _Actor) { return Invoke<0xDB0D0478, bool>(_Actor); }
+	static bool IS_ACTOR_MULE(Actor _Actor) { return Invoke<0x1F739295, bool>(_Actor); }
 	static bool IS_ACTOR_RIDING(Actor _Actor) { return Invoke<0xA6BBE769, bool>(_Actor); }
-	static int IS_ACTOR_RIDING_AND_IN_SADDLE(int _Unk0) { return Invoke<0xF270EAC1, int>(_Unk0); }
-	static int IS_ACTOR_MOUNTED(int _Unk0) { return Invoke<0xA3AB3708, int>(_Unk0); }
-	static int GET_RIDER(int _Unk0) { return Invoke<0x88A283E5, int>(_Unk0); }
+	static bool IS_ACTOR_RIDING_AND_IN_SADDLE(int _Unk0) { return Invoke<0xF270EAC1, bool>(_Unk0); }
+	static bool IS_ACTOR_MOUNTED(Actor _Actor) { return Invoke<0xA3AB3708, bool>(_Actor); }
+	static Actor GET_RIDER(Actor _Mount) { return Invoke<0x88A283E5, Actor>(_Mount); }
 	static Actor GET_MOUNT(Actor _Actor) { return Invoke<0xDD31EC4E, Actor>(_Actor); }
 	static void SET_MOUNTS_AS_PASSENGER(int _Unk0, int _Unk1) { Invoke<0xDC6DEE92, void>(_Unk0, _Unk1); }
-	static int ACTOR_MOUNT_ACTOR(int _Unk0, int _Unk1) { return Invoke<0xC28242F4, int>(_Unk0, _Unk1); }
-	static int DOES_HORSE_HAVE_ACCESSORY(int _Unk0, int _Unk1) { return Invoke<0x75D4E33F, int>(_Unk0, _Unk1); }
-	static int ACCESSORIZE_HORSE(int _Unk0, int _Unk1) { return Invoke<0x6C939AA7, int>(_Unk0, _Unk1); }
+	static void ACTOR_MOUNT_ACTOR(Actor _Actor, Actor _Mount) { Invoke<0xC28242F4, void>(_Actor, _Mount); }
+	static void REMOVE_HORSE_ACCESSORY(Actor _Mount, int _Accessory) { Invoke<0x374D047A, void>(_Mount, _Accessory); }
+	static bool DOES_HORSE_HAVE_ACCESSORY(Actor _Mount, int _Accessory) { return Invoke<0x75D4E33F, bool>(_Mount, _Accessory); }
+	static void ACCESSORIZE_HORSE(Actor _Mount, int _Accessory) { Invoke<0x6C939AA7, void>(_Mount, _Accessory); }
 	static int HORSE_ADD_REPULSION_EXCLUSION_VOLUME(int _Unk0) { return Invoke<0x28FCBDF2, int>(_Unk0); }
 	static int HORSE_REMOVE_REPULSION_EXCLUSION_VOLUME(int _Unk0) { return Invoke<0x5DE07F18, int>(_Unk0); }
-	static int HORSE_SET_CURR_FRESHNESS(int _Unk0, int _Unk1) { return Invoke<0xF3976D70, int>(_Unk0, _Unk1); }
-	static int HORSE_GET_CURR_FRESHNESS(int _Unk0) { return Invoke<0xB8665D8A, int>(_Unk0); }
-	static int HORSE_LOCK_FRESHNESS(int _Unk0) { return Invoke<0x8754817D, int>(_Unk0); }
-	static int HORSE_UNLOCK_FRESHNESS(int _Unk0) { return Invoke<0x6AFA044B, int>(_Unk0); }
+	static void HORSE_SET_CURR_FRESHNESS(Actor _Mount, float _Value) { Invoke<0xF3976D70, void>(_Mount, _Value); }
+	static float HORSE_GET_CURR_FRESHNESS(Actor _Mount) { return Invoke<0xB8665D8A, float>(_Mount); }
+	static void HORSE_LOCK_FRESHNESS(Actor _Mount) { Invoke<0x8754817D, void>(_Mount); }
+	static void HORSE_UNLOCK_FRESHNESS(Actor _Mount) { Invoke<0x6AFA044B, void>(_Mount); }
 	static void HORSE_SET_INFINITE_FRESHNESS_CHEAT(bool _Toggle) { Invoke<0xB731EB45, void>(_Toggle); }
 }
 
@@ -3046,10 +3057,10 @@ namespace STAT
 	static void UPDATE_STAT(int _Unk0, int _Unk1, int _Unk2) { Invoke<0xC9212F76, void>(_Unk0, _Unk1, _Unk2); }
 	static void ENABLE_JOURNAL_REPLAY(int _Unk0) { Invoke<0x957F1618, void>(_Unk0); }
 	static void SET_JOURNAL_INFO_LABEL(int _Unk0, int _Unk1) { Invoke<0x40C2576F, void>(_Unk0, _Unk1); }
-	static int GET_SAGPLAYER_STAT_FLOAT(int _Unk0) { return Invoke<0x5545C218, int>(_Unk0); }
-	static int GET_SAGPLAYER_STAT_INT(int _Unk0) { return Invoke<0xE623B382, int>(_Unk0); }
-	static void SET_SAGPLAYER_STAT_FLOAT(int _Unk0, int _Unk1) { Invoke<0x2104B1C0, void>(_Unk0, _Unk1); }
-	static void SET_SAGPLAYER_STAT_INT(int _Unk0, int _Unk1) { Invoke<0xF1A723D0, void>(_Unk0, _Unk1); }
+	static float GET_SAGPLAYER_STAT_FLOAT(int _StatId) { return Invoke<0x5545C218, float>(_StatId); }
+	static int GET_SAGPLAYER_STAT_INT(int _StatId) { return Invoke<0xE623B382, int>(_StatId); }
+	static void SET_SAGPLAYER_STAT_FLOAT(int _StatId, float _Value) { Invoke<0x2104B1C0, void>(_StatId, _Value); }
+	static void SET_SAGPLAYER_STAT_INT(int _StatId, int _Value) { Invoke<0xF1A723D0, void>(_StatId, _Value); }
 	static int GET_NUM_KILLS_LAST_DEADEYE() { return Invoke<0xBBF4F7E4, int>(); }
 }
 
@@ -3058,9 +3069,9 @@ namespace STREAM
 	static void STREAMING_REQUEST_ACTOR(ActorModel _Model, bool _Unk0, bool _Unk1) { Invoke<0xB0A79FEE, void>(_Model, _Unk0, _Unk1); }
 	static bool STREAMING_IS_ACTOR_LOADED(ActorModel _Model, int _Unk) { return Invoke<0x7DF72579, bool>(_Model, _Unk); }
 	static void STREAMING_EVICT_ACTOR(int _Unk0, int _Unk1) { Invoke<0x6661CF89, void>(_Unk0, _Unk1); }
-	static int STREAMING_IS_WORLD_LOADED() { return Invoke<0x87B74064, int>(); }
-	static int STREAMING_IS_WORLD_LOADED_PRIORITY(int _Unk0) { return Invoke<0x943BE053, int>(_Unk0); }
-	static int STREAMING_ARE_BOUNDS_LOADED(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { return Invoke<0xC07681C1, int>(_Unk0, _Unk1, _Unk2, _Unk3); }
+	static bool STREAMING_IS_WORLD_LOADED() { return Invoke<0x87B74064, bool>(); }
+	static bool STREAMING_IS_WORLD_LOADED_PRIORITY(int _Unk0) { return Invoke<0x943BE053, bool>(_Unk0); }
+	static bool STREAMING_ARE_BOUNDS_LOADED(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { return Invoke<0xC07681C1, bool>(_Unk0, _Unk1, _Unk2, _Unk3); }
 	static bool STREAMING_REQUEST_PROP(int _AssetId, bool _Unk) { return Invoke<0x38DC1F50, bool>(_AssetId, _Unk); }
 	static bool STREAMING_IS_PROP_LOADED(int _AssetId) { return Invoke<0xD7F80035, bool>(_AssetId); }
 	static void STREAMING_EVICT_PROP(int _Unk0) { Invoke<0xA8D12960, void>(_Unk0); }
@@ -3076,7 +3087,8 @@ namespace STREAM
 	static void STREAMING_REQUEST_SCRIPT(int _Unk0) { Invoke<0x11E57A92, void>(_Unk0); }
 	static int STREAMING_IS_SCRIPT_LOADED(int _Unk0) { return Invoke<0xB5B4AEAD, int>(_Unk0); }
 	static void STREAMING_EVICT_SCRIPT(int _Unk0) { Invoke<0x570163E2, void>(_Unk0); }
-	static void STREAMING_LOAD_SCENE_EXT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6) { Invoke<0xCB1E8485, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6); }
+	static void STREAMING_LOAD_ALL_REQUESTS_NOW() { Invoke<0x7B5C28F3, void>(); }
+	static void STREAMING_LOAD_SCENE_EXT(Vector2 _PositionXY, float _PositionZ, Vector2 _RotationXY, float _RotationZ, bool _Unk5) { Invoke<0xCB1E8485, void>(_PositionXY, _PositionZ, _RotationXY, _RotationZ, _Unk5); }
 	static void STREAMING_UNLOAD_SCENE() { Invoke<0x39E69B1B, void>(); }
 	static void STREAMING_OVERRIDE_MAIN_POI(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { Invoke<0x338F85D9, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static void STREAMING_RELEASE_MAIN_POI() { Invoke<0x7D5C0C4D, void>(); }
@@ -3085,8 +3097,8 @@ namespace STREAM
 	static void STREAMING_ENABLE_POI_STREAMING(int _Unk0) { Invoke<0x49E4EB10, void>(_Unk0); }
 	static void STREAMING_PREVENT_SNIPER_MODE(int _Unk0) { Invoke<0x5F4C08A2, void>(_Unk0); }
 	static void STREAMING_SET_CUTSCENE_MODE(int _Unk0) { Invoke<0x83088F62, void>(_Unk0); }
-	static void STREAMING_ENABLE_BOUNDS(int _Unk0) { Invoke<0x0BEBB187, void>(_Unk0); }
-	static void STREAMING_LOAD_BOUNDS(float x, float y, float z, float unk, int _Unk4) { Invoke<0x0F8FC4D0, void>(x, y, z, unk, _Unk4); }
+	static void STREAMING_ENABLE_BOUNDS(bool _Enable) { Invoke<0x0BEBB187, void>(_Enable); }
+	static void STREAMING_LOAD_BOUNDS(float _X, float _Y, float _Z, bool _Unk) { Invoke<0x0F8FC4D0, void>(_X, _Y, _Z, _Unk); }
 	static void STREAMING_LOAD_BOUNDS_EXT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { Invoke<0x1CD960B8, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static void STREAMING_UNLOAD_BOUNDS() { Invoke<0x09A67EC6, void>(); }
 	static void STREAMING_EVICT_ALL() { Invoke<0x7D432781, void>(); }
@@ -3094,8 +3106,8 @@ namespace STREAM
 	static void DUMP_MEMORY_STATS() { Invoke<0xCA99D3B4, void>(); }
 	static void REPORT_METRICS_PERFORMANCE() { Invoke<0xE74C4851, void>(); }
 	static void STREAMING_SET_POI_LIMIT(int _Unk0) { Invoke<0x6F9C399B, void>(_Unk0); }
-	static void STREAMING_ENABLE_FORCE_FRAGMENT_HIGH_LOD(int _Unk0) { Invoke<0xBEABC729, void>(_Unk0); }
-	static void STREAMING_DISABLE_FORCE_FRAGMENT_HIGH_LOD(int _Unk0) { Invoke<0xB226E8E3, void>(_Unk0); }
+	static void STREAMING_ENABLE_FORCE_FRAGMENT_HIGH_LOD(Object _Object) { Invoke<0xBEABC729, void>(_Object); }
+	static void STREAMING_DISABLE_FORCE_FRAGMENT_HIGH_LOD(Object _Object) { Invoke<0xB226E8E3, void>(_Object); }
 	static void RESIZE_ACTOR_SET() { Invoke<0x83E043A6, void>(); }
 }
 
@@ -3284,22 +3296,22 @@ namespace UI
 	static void UI_POP(const char* _Unk0) { Invoke<0xBEE5CF6C, void>(_Unk0); }
 	static void UI_PUSH(const char* _Unk0) { Invoke<0x97C5EFC8, void>(_Unk0); }
 	static void UI_GOTO(int _Unk0) { Invoke<0xA0159C77, void>(_Unk0); }
-	static void UI_EXIT(const char* uiLayer) { Invoke<0x2DF89C2E, void>(uiLayer); }
-	static void UI_SHOW(const char* uiLayer) { Invoke<0xD1D1D467, void>(uiLayer); }
+	static void UI_EXIT(const char* _UILayer) { Invoke<0x2DF89C2E, void>(_UILayer); }
+	static void UI_SHOW(const char* _UILayer) { Invoke<0xD1D1D467, void>(_UILayer); }
 	static void UI_REFRESH(const char* _UILayer) { Invoke<0xFAC3DF71, void>(_UILayer); }
-	static void UI_HIDE(const char* uiLayer) { Invoke<0x7508E7F3, void>(uiLayer); }
+	static void UI_HIDE(const char* _UILayer) { Invoke<0x7508E7F3, void>(_UILayer); }
 	static void UI_ENABLE(const char* _UILayer) { Invoke<0xE576DCAD, void>(_UILayer); }
 	static void UI_DISABLE(const char* _UILayer) { Invoke<0xC4532F84, void>(_UILayer); }
-	static bool UI_ISACTIVE(const char* UiLayer) { return Invoke<0xB1FDB70D, bool>(UiLayer); }
-	static void UI_ACTIVATE(const char* UiLayer) { Invoke<0xD11BD55A, void>(UiLayer); }
-	static void UI_DEACTIVATE(const char* _Unk0) { Invoke<0xCA35BB5E, void>(_Unk0); }
+	static bool UI_ISACTIVE(const char* _UILayer) { return Invoke<0xB1FDB70D, bool>(_UILayer); }
+	static void UI_ACTIVATE(const char* _UILayer) { Invoke<0xD11BD55A, void>(_UILayer); }
+	static void UI_DEACTIVATE(const char* _UILayer) { Invoke<0xCA35BB5E, void>(_UILayer); }
 	static void UI_EXCLUDE(const char* _UILayer) { Invoke<0x4A005F2A, void>(_UILayer); }
 	static void UI_INCLUDE(const char* _UILayer) { Invoke<0x209255AD, void>(_UILayer); }
 	static bool UI_ISFOCUSED(const char* _UILayer) { return Invoke<0x6F2509E8, bool>(_UILayer); }
 	static void UI_FOCUS(const char* _UILayer) { Invoke<0x699CC85E, void>(_UILayer); }
 	static void UI_UNFOCUS(const char* _UILayer) { Invoke<0x0ACEA059, void>(_UILayer); }
 	static void UI_RESTORE(const char* _UILayer) { Invoke<0x7ADB2BE7, void>(_UILayer); }
-	static void UI_SUPPRESS(char* uiLayer) { Invoke<0x182EC44A, void>(uiLayer); }
+	static void UI_SUPPRESS(const char* _UILayer) { Invoke<0x182EC44A, void>(_UILayer); }
 	static int UI_GET_SELECTED_INDEX(const char* MenuID, bool UNK0) { return Invoke<0x8B63A008, int>(MenuID, UNK0); }
 	static void UI_SET_STYLE(int _Unk0, int _Unk1) { Invoke<0x1ECD8B18, void>(_Unk0, _Unk1); }
 	static void UI_ADD_CHILD(int _Unk0, int _Unk1) { Invoke<0x13F156A4, void>(_Unk0, _Unk1); }
@@ -3311,7 +3323,7 @@ namespace UI
 	static void UI_REGISTER_STREAMING_TEXTURE(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x1F9EE9E1, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
 	static void UI_SET_STRING(const char* _Entry, const char* _String) { Invoke<0xE457546C, void>(_Entry, _String); }
 	static void UI_SET_STRING_FORMAT(const char* _GXTName, const char* _Format, const char* _Str) { Invoke<0xEDA84121, void>(_GXTName, _Format, _Str); }
-	static void UI_SET_MONEY(const char* _GXTEntry1, const char* _GXTEntry2, float _Amount) { Invoke<0xF71BD93A, void>(_GXTEntry1, _GXTEntry2, _Amount); }
+	static void UI_SET_MONEY(const char* _GXTEntry1, const char* _GXTEntry2, int _Amount) { Invoke<0xF71BD93A, void>(_GXTEntry1, _GXTEntry2, _Amount); }
 	static const char* UI_GET_STRING(const char* _GXTEntry) { return Invoke<0xCCCFF80B, const char*>(_GXTEntry); }
 	static int UI_GET_STRING_BY_HASH(int _Unk0) { return Invoke<0xBA89F5EA, int>(_Unk0); }
 	static void UI_MESSAGEBOX_SET_DESCRIPTION(const char* ui_id, const char* new_text) { Invoke<0x591339B9, void>(ui_id, new_text); }
@@ -3327,7 +3339,7 @@ namespace UI
 	static void UI_SET_PROGRESS_BAR_CHANGE(int _Unk0, int _Unk1) { Invoke<0xDF4627D1, void>(_Unk0, _Unk1); }
 	static void _UI_SET_AUTO_EXIT_TIME(int _Unk0, int _Unk1) { Invoke<0xD792B93B, void>(_Unk0, _Unk1); }
 	static void UI_SET_ICON(int _Unk0, int _Unk1) { Invoke<0x191BA4DF, void>(_Unk0, _Unk1); }
-	static int _UI_IS_MOVIE_LOADED(int _Unk0) { return Invoke<0x9D20BDC4, int>(_Unk0); }
+	static bool UI_IS_FUIMOVIE_LOADED(const char* _MovieName) { return Invoke<0x9D20BDC4, bool>(_MovieName); }
 }
 
 namespace UI_HUD
@@ -3348,7 +3360,7 @@ namespace VEHICLES
 	static bool IS_ACTOR_RIDING_VEHICLE(Actor _Actor) { return Invoke<0xDE19A1F9, bool>(_Actor); }
 	static Vehicle GET_VEHICLE(Actor _Actor) { return Invoke<0xA0936EB6, Vehicle>(_Actor); }
 	static int GET_ACTOR_VEHICLE_STATE(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0xCEA2449F, int>(_Unk0, _Unk1, _Unk2); }
-	static int GET_NUM_DRAFTED_ACTORS(int _Unk0) { return Invoke<0xDAB0D820, int>(_Unk0); }
+	static int GET_NUM_DRAFTED_ACTORS(Vehicle _Vehicle) { return Invoke<0xDAB0D820, int>(_Vehicle); }
 	static bool SET_ACTOR_IN_VEHICLE(Actor _Actor, Vehicle _Vehicle, int _SeatId) { return Invoke<0x32974F99, bool>(_Actor, _Vehicle, _SeatId); }
 	static Actor GET_DRAFT_ACTOR(int _HarnessId, Actor _Actor) { return Invoke<0x48D5121D, int>(_HarnessId, _Actor); }
 	static bool IS_ACTOR_DRAFTED(Actor _Actor) { return Invoke<0xEF2C329D, bool>(_Actor); }
@@ -3360,9 +3372,9 @@ namespace VEHICLES
 	static bool ENABLE_VEHICLE_SEAT(Vehicle _Vehicle, int _SeatId, bool _Enable) { return Invoke<0x6AC8234D, bool>(_Vehicle, _SeatId, _Enable); }
 	static void STOP_VEHICLE(Vehicle _Vehicle) { Invoke<0xC2232D29, void>(_Vehicle); }
 	static void START_VEHICLE(Vehicle _Vehicle) { Invoke<0xE4442AB2, void>(_Vehicle); }
-	static int ACCESSORIZE_VEHICLE_HORSES(int _Unk0, int _Unk1) { return Invoke<0xB12584C8, int>(_Unk0, _Unk1); }
+	static void ACCESSORIZE_VEHICLE_HORSES(Vehicle _Vehicle, int _Unk1) { Invoke<0xB12584C8, void>(_Vehicle, _Unk1); }
 	static int GET_NUM_DRAFT_POSITIONS(int _Unk0) { return Invoke<0xD85CA776, int>(_Unk0); }
-	static int ATTACH_DRAFT_TO_VEHICLE(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { return Invoke<0xB0A81226, int>(_Unk0, _Unk1, _Unk2, _Unk3); }
+	static void ATTACH_DRAFT_TO_VEHICLE(Actor _Actor, Vehicle _Vehicle, int _Position, bool _Unk) { Invoke<0xB0A81226, void>(_Actor, _Vehicle, _Position, _Unk); }
 	static int DETACH_DRAFT_FROM_VEHICLE_BY_ACTOR(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0xF763B06D, int>(_Unk0, _Unk1, _Unk2); }
 	static int DETACH_DRAFT_FROM_VEHICLE_BY_ACTOR(int _Unk0) { return Invoke<0x8C3B533B, int>(_Unk0); }
 	static int TRAIN_CREATE_NEW_TRAIN(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x8533AC9D, int>(_Unk0, _Unk1, _Unk2); }
@@ -3437,22 +3449,22 @@ namespace WEAPON
 	static void INIT_NATIVE_WEAPONENUM_TURRET(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x82609DC7, void>(_Unk0, _Unk1, _Unk2); }
 	static void INIT_NATIVE_WEAPONENUM_CANNON(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x628E3173, void>(_Unk0, _Unk1, _Unk2); }
 	static void INIT_NATIVE_WEAPONENUM_AMMO(int _Unk0, int _Unk1) { Invoke<0xCE5CCF2E, void>(_Unk0, _Unk1); }
-	static int GET_WEAPON_ENUM_STRING_FROM_ENUM(int _Unk0) { return Invoke<0x6A9CFA2A, int>(_Unk0); }
+	static const char* GET_WEAPON_ENUM_STRING_FROM_ENUM(WeaponModel _WeaponModel) { return Invoke<0x6A9CFA2A, const char*>(_WeaponModel); }
 	static const char* GET_WEAPON_DISPLAY_NAME(WeaponModel _WeaponModel) { return Invoke<0x35CD589C, const char*>(_WeaponModel); }
 	static const char* GET_WEAPON_INTERNAL_NAME(WeaponModel _WeaponModel) { return Invoke<0x87C5471F, const char*>(_WeaponModel); }
 	static const char* _GET_WEAPON_ICON_NAME(WeaponModel _WeaponModel) { return Invoke<0xBE06C265, const char*>(_WeaponModel); }
 	static const char* GET_WEAPON_FRAGMENT_NAME(WeaponModel _WeaponModel) { return Invoke<0xE8739A48, const char*>(_WeaponModel); }
 	static void INIT_NATIVE_WEAPONENUM_CATEGORY(int _Unk0, int _Unk1) { Invoke<0x01C7193C, void>(_Unk0, _Unk1); }
 	static void FINALIZE_WEAPONENUM_CATEGORIES() { Invoke<0x0A23A69C, void>(); }
-	static void SET_WEAPONENUM_LOCKED(int _Unk0, int _Unk1) { Invoke<0x0E4B7A33, void>(_Unk0, _Unk1); }
-	static int IS_WEAPONENUM_LOCKED(int _Unk0) { return Invoke<0xCCE4A339, int>(_Unk0); }
-	static int GET_WEAPON_CATEGORY_FROM_ENUM(int _Unk0) { return Invoke<0xDB679ED9, int>(_Unk0); }
-	static int GET_AMMO_ENUM(int _Unk0) { return Invoke<0xD3E16075, int>(_Unk0); }
+	static void SET_WEAPONENUM_LOCKED(WeaponModel _WeaponModel, bool _IsLocked) { Invoke<0x0E4B7A33, void>(_WeaponModel, _IsLocked); }
+	static bool IS_WEAPONENUM_LOCKED(WeaponModel _WeaponModel) { return Invoke<0xCCE4A339, bool>(_WeaponModel); }
+	static WeaponCategory GET_WEAPON_CATEGORY_FROM_ENUM(WeaponModel _WeaponModel) { return Invoke<0xDB679ED9, WeaponCategory>(_WeaponModel); }
+	static AmmoType GET_AMMO_ENUM(WeaponModel _WeaponModel) { return Invoke<0xD3E16075, AmmoType>(_WeaponModel); }
 	static void SET_AMMO_DROP_BIAS(int _Unk0, int _Unk1) { Invoke<0x08A655C5, void>(_Unk0, _Unk1); }
-	static int GET_AMMO_ENUM_STRING_FROM_ENUM(int _Unk0) { return Invoke<0xCCB57C38, int>(_Unk0); }
-	static int GET_AMMO_ENUM_ICON_NAME(int _Unk0) { return Invoke<0x2AF84928, int>(_Unk0); }
+	static const char* GET_AMMO_ENUM_STRING_FROM_ENUM(AmmoType _AmmoType) { return Invoke<0xCCB57C38, const char*>(_AmmoType); }
+	static const char* GET_AMMO_ENUM_ICON_NAME(AmmoType _AmmoType) { return Invoke<0x2AF84928, const char*>(_AmmoType); }
 	static float GET_WEAPON_MAX_AMMO(WeaponModel _WeaponModel) { return Invoke<0xA677B204, float>(_WeaponModel); }
-	static void RESOLVE_DLC_WEAPONENUM(int _Unk0) { Invoke<0xD291A820, void>(_Unk0); }
+	static void RESOLVE_DLC_WEAPONENUM(WeaponModel _WeaponModel) { Invoke<0xD291A820, void>(_WeaponModel); }
 	static void ADD_IDLEFX_TO_WEAPON(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { Invoke<0xF4641CF4, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
 }
 
@@ -3552,6 +3564,7 @@ namespace REDHOOK
 	static bool WORLD_TO_SCREEN(Vector3* _WorldPosition, float* _X, float* _Y) { return Invoke<0xBAA72911, bool>(_WorldPosition, _X, _Y); }
 	static void SET_PLAYER_RELOAD_TIME_SCALE(bool _Override, float _TimeScale) { Invoke<0x6FCC9A11, void>(_Override, _TimeScale); }
 	static void SET_PLAYER_AUTO_FIRING(bool _AutoFiring) { Invoke<0x064E9472, void>(_AutoFiring); }
+	static void SET_ACTORS_JUMP_HEIGHT(float _JumpHeight) { Invoke<0x605297B1, void>(_JumpHeight); }
 	static float GET_TIME_SCALE() { return Invoke<0x8CFD581F, float>(); }
 	static void SET_TIME_SCALE(float _TimeScale) { Invoke<0xA7F84694, void>(_TimeScale); }
 }
