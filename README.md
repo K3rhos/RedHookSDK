@@ -8,7 +8,7 @@ This is the SDK of RedHook (ScriptHook) using C++ 23, this repo contains an Exam
 • Visual Studio 2022
 
 # 📄 Documentation
-If you need some help regarding some functions of this SDK, you can visit my [docs website](https://docs.redmods.com/redhook).
+If you need some help regarding some functions of this SDK, you can visit my [docs website](https://docs.redmods.com/).
 
 # 🎞️ Credits
 Thanks to all my friends helping me testing **RedHook** and also thanks to:
