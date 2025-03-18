@@ -3225,7 +3225,7 @@ namespace TASKS
 	static void TASK_SURROUND_ACTOR(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { Invoke<0x5DD80BEF, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static void TASK_TAUNT_ACTOR(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { Invoke<0x9043D092, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static void TASK_TAUNT_ACTOR_IN_PLACE(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x030FB1FA, void>(_Unk0, _Unk1, _Unk2); }
-	static void TASK_USE_GRINGO(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { Invoke<0xA0E003A7, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
+	static void TASK_USE_GRINGO(int _Unk0, int _Unk1, const char* _Unk2, int _Unk3, int _Unk4) { Invoke<0xA0E003A7, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
 	static void TASK_USE_LASSO(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { Invoke<0xC41AAF49, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static void TASK_USE_TURRET(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x6484F21E, void>(_Unk0, _Unk1, _Unk2); }
 	static void TASK_USE_TURRET_AGAINST_COORD(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x3B8DBA13, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
