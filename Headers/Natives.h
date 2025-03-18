@@ -1674,7 +1674,7 @@ namespace GRINGO
 	static int GRINGO_IS_ACTOR_PLAYING_ANIM(int _Unk0, int _Unk1) { return Invoke<0x35279C3F, int>(_Unk0, _Unk1); }
 	static int GRINGO_RETURN_ACTOR_TO_DEFAULT_ANIMS(int _Unk0) { return Invoke<0xB62D549E, int>(_Unk0); }
 	static int GRINGO_OWNS_ACTOR_ANIMS(int _Unk0) { return Invoke<0xE9C74577, int>(_Unk0); }
-	static int GRINGO_PLAY_ANIM_ON_ACTOR_WITH_PROP_COMPONENT(Actor _Actor, int _Unk1, int _Unk2, int _Unk3, int _Unk4, bool _Unk5) { return Invoke<0xB8C419C3, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
+	static int GRINGO_PLAY_ANIM_ON_ACTOR_WITH_PROP_COMPONENT(Actor _Actor, int _Unk1, int _Unk2, int _Unk3, int _Unk4, bool _Unk5) { return Invoke<0xB8C419C3, int>(_Actor, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static void GRINGO_ACTOR_DROP_ATTACHED_PROP(int _Unk0) { Invoke<0x0B9AE52F, void>(_Unk0); }
 	static int ATTACH_PROP_TO_ANIM(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { return Invoke<0x0436C0BF, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static int GRINGO_ATTACH_PROP_TO_ANIM(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { return Invoke<0x4DB7C61C, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
