@@ -559,10 +559,10 @@ namespace ANIM
 	static void RELEASE_ACTOR_ANIM_PHASE_LOCK(int _Unk0) { Invoke<0xAEBAE989, void>(_Unk0); }
 	static int IS_ACTOR_ANIM_PHASE_LOCKED(int _Unk0) { return Invoke<0xE0AC4B86, int>(_Unk0); }
 	static void SET_ACTOR_CUTSCENE_MODE(int _Unk0, int _Unk1) { Invoke<0x76ECD5F1, void>(_Unk0, _Unk1); }
-	static void REQUEST_ANIM_SET(int _Unk0, int _Unk1) { Invoke<0x2988B3FC, void>(_Unk0, _Unk1); }
-	static int HAS_ANIM_SET_LOADED(int _Unk0) { return Invoke<0x4FFF397D, int>(_Unk0); }
+	static void REQUEST_ANIM_SET(const char* _AnimSet, int _Unk1) { Invoke<0x2988B3FC, void>(_AnimSet, _Unk1); }
+	static bool HAS_ANIM_SET_LOADED(const char* _AnimSet) { return Invoke<0x4FFF397D, bool>(_AnimSet); }
 	static void REMOVE_ANIM_SET(int _Unk0) { Invoke<0xD04A817A, void>(_Unk0); }
-	static int SET_ANIM_SET_FOR_ACTOR(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x39C1E1C0, int>(_Unk0, _Unk1, _Unk2); }
+	static int SET_ANIM_SET_FOR_ACTOR(Actor _Actor, const char* _AnimSet, int _Unk2) { return Invoke<0x39C1E1C0, int>(_Actor, _AnimSet, _Unk2); }
 	static void RESET_ANIM_SET_FOR_ACTOR(int _Unk0, int _Unk1) { Invoke<0x7A6C5C2F, void>(_Unk0, _Unk1); }
 	static void DLC_REPLACE_EXISTING_ANIM_SET(int _Unk0) { Invoke<0xB1B643E0, void>(_Unk0); }
 	static int REQUEST_ACTION_TREE(int _Unk0) { return Invoke<0xB3039DB7, int>(_Unk0); }
@@ -3205,6 +3205,7 @@ namespace TASKS
 	static void TASK_KILL_CHAR(int _Unk0, int _Unk1) { Invoke<0x1AE4B75B, void>(_Unk0, _Unk1); }
 	static void TASK_MELEE_ATTACK(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x4FEADDD9, void>(_Unk0, _Unk1, _Unk2); }
 	static void TASK_MOUNT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { Invoke<0xB6131204, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
+	static void TASK_PLAY_ANIM(Actor _Actor, const char* _AnimName, float _Unk2, float _Unk3, float _Unk4, float _Unk5, bool _Unk6, bool _Unk7, int _Unk8) { Invoke<0x5AB552C6, void>(_Actor, _AnimName, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
 	static void TASK_POINT_GUN_AT_COORD(int _Unk0, int _Unk1, int _Unk2) { Invoke<0xAD3729AD, void>(_Unk0, _Unk1, _Unk2); }
 	static void TASK_POINT_GUN_AT_OBJECT(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x95C206C2, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
 	static void TASK_RESPOND_TO_HORSE_WHISTLE(int _Unk0, int _Unk1) { Invoke<0x69B924A7, void>(_Unk0, _Unk1); }
