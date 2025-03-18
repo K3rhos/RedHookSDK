@@ -2,6 +2,20 @@
 
 
 
+static void PlaySleepAnimation()
+{
+	Actor localPlayerActor = ACTOR::GET_PLAYER_ACTOR(-1);
+
+	Vector3 position = ACTOR::GET_POSITION(localPlayerActor);
+	Vector3 rotation = Vector3(0.0f, 0.0f, 0.0f);
+
+	Layout playerLayout = OBJECT::FIND_NAMED_LAYOUT("PlayerLayout");
+
+	OBJECT::CREATE_GRINGO_IN_LAYOUT(playerLayout, "sleeping", "$/content/scripting/gringo/simplegringo/sleeping", PACK_VECTOR3(position), PACK_VECTOR3(rotation));
+}
+
+
+
 void Application::Initialize(HMODULE _Module)
 {
 	InputsManager::Register();
@@ -13,6 +27,11 @@ void Application::Initialize(HMODULE _Module)
 		while (true)
 		{
 			NoClip::Update();
+
+			if (Input::IsKeyJustPressed(KEY_F6))
+			{
+				PlaySleepAnimation();
+			}
 
 			ScriptWait(0);
 		}

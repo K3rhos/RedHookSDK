@@ -1674,7 +1674,7 @@ namespace GRINGO
 	static int GRINGO_IS_ACTOR_PLAYING_ANIM(int _Unk0, int _Unk1) { return Invoke<0x35279C3F, int>(_Unk0, _Unk1); }
 	static int GRINGO_RETURN_ACTOR_TO_DEFAULT_ANIMS(int _Unk0) { return Invoke<0xB62D549E, int>(_Unk0); }
 	static int GRINGO_OWNS_ACTOR_ANIMS(int _Unk0) { return Invoke<0xE9C74577, int>(_Unk0); }
-	static int GRINGO_PLAY_ANIM_ON_ACTOR_WITH_PROP_COMPONENT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { return Invoke<0xB8C419C3, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
+	static int GRINGO_PLAY_ANIM_ON_ACTOR_WITH_PROP_COMPONENT(Actor _Actor, int _Unk1, int _Unk2, int _Unk3, int _Unk4, bool _Unk5) { return Invoke<0xB8C419C3, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static void GRINGO_ACTOR_DROP_ATTACHED_PROP(int _Unk0) { Invoke<0x0B9AE52F, void>(_Unk0); }
 	static int ATTACH_PROP_TO_ANIM(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { return Invoke<0x0436C0BF, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
 	static int GRINGO_ATTACH_PROP_TO_ANIM(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { return Invoke<0x4DB7C61C, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
@@ -2420,7 +2420,7 @@ namespace OBJECT
 	static int CREATE_POINT_LIGHT_IN_LAYOUT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8) { return Invoke<0xF9CC7F63, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
 	static int CREATE_VOLUME_IN_LAYOUT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8, int _Unk9, int _Unk10, int _Unk11) { return Invoke<0xA17311E4, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8, _Unk9, _Unk10, _Unk11); }
 	static int CREATE_VOLUME_SET_IN_LAYOUT(int _Unk0, int _Unk1) { return Invoke<0x177A3843, int>(_Unk0, _Unk1); }
-	static int CREATE_GRINGO_IN_LAYOUT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8) { return Invoke<0x025C9845, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
+	static int CREATE_GRINGO_IN_LAYOUT(Layout _Layout, const char* _LayoutName, const char* _GringoPath, Vector2 _PositionXY, float _PositionZ, Vector2 _RotationXY, float _RotationZ) { return Invoke<0x025C9845, int>(_Layout, _LayoutName, _GringoPath, _PositionXY, _PositionZ, _RotationXY, _RotationZ); }
 	static int IN_TARGETTING_POSSE(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8) { return Invoke<0x88087384, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
 	static int CREATE_GRINGO_IN_LAYOUT_BY_ID(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8) { return Invoke<0x66A8AF91, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
 	static int CREATE_GRINGO_ON_OBJECT_BY_ID(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7, int _Unk8) { return Invoke<0x80FB8BDE, int>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7, _Unk8); }
