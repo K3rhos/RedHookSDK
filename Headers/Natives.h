@@ -3568,4 +3568,7 @@ namespace REDHOOK
 	static void SET_ACTORS_JUMP_HEIGHT(float _JumpHeight) { Invoke<0x605297B1, void>(_JumpHeight); }
 	static float GET_TIME_SCALE() { return Invoke<0x8CFD581F, float>(); }
 	static void SET_TIME_SCALE(float _TimeScale) { Invoke<0xA7F84694, void>(_TimeScale); }
+	static bool IS_KEY_DOWN(KeyCode _KeyCode) { return Invoke<0xAC93D58A, bool>(_KeyCode); }
+	static bool IS_KEY_PRESSED(KeyCode _KeyCode) { return Invoke<0x6AFB8EB9, bool>(_KeyCode); }
+	static bool IS_KEY_RELEASED(KeyCode _KeyCode) { return Invoke<0x21B6EB31, bool>(_KeyCode); }
 }

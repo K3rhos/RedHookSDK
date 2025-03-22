@@ -81,7 +81,8 @@ static void PlaySleepAnimation()
 
 void Application::Initialize(HMODULE _Module)
 {
-	InputsManager::Register();
+	// This is now longer needed since RedHook v0.8 (If you still want to use it, uncomment this line)
+	// InputsManager::Register();
 
 	ScriptRegister(_Module, []
 	{
@@ -91,7 +92,7 @@ void Application::Initialize(HMODULE _Module)
 		{
 			NoClip::Update();
 
-			if (Input::IsKeyJustPressed(KEY_F6))
+			if (REDHOOK::IS_KEY_PRESSED(KEY_F6))
 			{
 				PlaySleepAnimation();
 			}
@@ -107,5 +108,6 @@ void Application::Shutdown(HMODULE _Module)
 {
 	ScriptUnregister(_Module);
 
-	InputsManager::Unregister();
+	// This is now longer needed since RedHook v0.8 (If you still want to use it, uncomment this line)
+	// InputsManager::Unregister();
 }

@@ -53,7 +53,7 @@ void NoClip::Update()
 {
 	Actor localPlayerActor = ACTOR::GET_PLAYER_ACTOR(-1);
 
-	if (Input::IsKeyJustPressed(KEY_F4) || (CORE::IS_BUTTON_DOWN(0, BUTTON_DPAD_DOWN) && CORE::IS_BUTTON_PRESSED(0, BUTTON_B)))
+	if (REDHOOK::IS_KEY_PRESSED(KEY_F4) || (CORE::IS_BUTTON_DOWN(0, BUTTON_DPAD_DOWN) && CORE::IS_BUTTON_PRESSED(0, BUTTON_B)))
 	{
 		s_NoClip ^= true;
 
@@ -82,7 +82,7 @@ void NoClip::Update()
 		float speed = s_NoClipSpeeds[s_NoClipSpeedIndex];
 
 		// Handle no clip different speed levels
-		if (Input::IsKeyJustPressed(KEY_Q))
+		if (REDHOOK::IS_KEY_PRESSED(KEY_Q))
 		{
 			if (s_NoClipSpeedIndex > 0)
 			{
@@ -93,7 +93,7 @@ void NoClip::Update()
 				_PRINT_BOTTOM_FORMAT("No Clip Speed <red>x%d", (int)speed);
 			}
 		}
-		else if (Input::IsKeyJustPressed(KEY_E))
+		else if (REDHOOK::IS_KEY_PRESSED(KEY_E))
 		{
 			if (s_NoClipSpeedIndex < (s_NoClipSpeeds.size() - 1))
 			{
@@ -106,7 +106,7 @@ void NoClip::Update()
 		}
 
 		// Handle speed boost
-		if (Input::IsKeyPressed(KEY_LEFT_SHIFT) || CORE::IS_BUTTON_DOWN(0, BUTTON_STICK_LEFT))
+		if (REDHOOK::IS_KEY_DOWN(KEY_LEFT_SHIFT) || CORE::IS_BUTTON_DOWN(0, BUTTON_STICK_LEFT))
 			speed *= 2.0f;
 
 		float movementSpeed = BUILTIN::TIMESTEP() * speed;
@@ -115,16 +115,16 @@ void NoClip::Update()
 		// NOTE: This support keyboard region, as an example is you're
 		// using an AZERTY keyboard layout like me, it will
 		// automatically be in ZQSD instead of WASD.
-		if (Input::IsKeyPressed(KEY_W))
+		if (REDHOOK::IS_KEY_DOWN(KEY_W))
 			position -= GET_FORWARD_VECTOR(localPlayerActor) * movementSpeed;
 
-		if (Input::IsKeyPressed(KEY_S))
+		if (REDHOOK::IS_KEY_DOWN(KEY_S))
 			position += GET_FORWARD_VECTOR(localPlayerActor) * movementSpeed;
 
-		if (Input::IsKeyPressed(KEY_A))
+		if (REDHOOK::IS_KEY_DOWN(KEY_A))
 			position -= GET_RIGHT_VECTOR(localPlayerActor) * movementSpeed;
 
-		if (Input::IsKeyPressed(KEY_D))
+		if (REDHOOK::IS_KEY_DOWN(KEY_D))
 			position += GET_RIGHT_VECTOR(localPlayerActor) * movementSpeed;
 
 		if (leftStickY < -stickDeadZone || leftStickY > stickDeadZone)
@@ -134,11 +134,11 @@ void NoClip::Update()
 			position += GET_RIGHT_VECTOR(localPlayerActor) * leftStickX * movementSpeed;
 
 		// Handle going up/down
-		if (Input::IsKeyPressed(KEY_SPACE) || CORE::IS_BUTTON_DOWN(0, BUTTON_A))
+		if (REDHOOK::IS_KEY_DOWN(KEY_SPACE) || CORE::IS_BUTTON_DOWN(0, BUTTON_A))
 		{
 			position.y += movementSpeed;
 		}
-		else if (Input::IsKeyPressed(KEY_LEFT_CTRL) || CORE::IS_BUTTON_DOWN(0, BUTTON_X))
+		else if (REDHOOK::IS_KEY_DOWN(KEY_LEFT_CTRL) || CORE::IS_BUTTON_DOWN(0, BUTTON_X))
 		{
 			position.y -= movementSpeed;
 		}

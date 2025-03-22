@@ -2,6 +2,13 @@
 
 
 
+/*
+This class is the "old" keyboard inputs handler method, used before RedHook v0.8, this should be removed in the future
+bcs keyboard inputs are now properly handled using custom natives (see Natives.h) that use the internal RDR keyboard handler system.
+*/
+
+
+
 void InputsManager::Register()
 {
 	KeyboardHandlerRegister(KeyboardHandler);
@@ -43,6 +50,7 @@ void InputsManager::KeyboardHandler(DWORD _Key, WORD _Repeats, BYTE _ScanCode, B
 
 
 
+// Deprecated: Use native REDHOOK::IS_KEY_DOWN instead
 bool Input::IsKeyPressed(KeyCode _KeyCode)
 {
 	KeyState keyState = InputsManager::GetKeyState(_KeyCode);
@@ -52,6 +60,7 @@ bool Input::IsKeyPressed(KeyCode _KeyCode)
 
 
 
+// Deprecated: Use native REDHOOK::IS_KEY_RELEASED instead
 bool Input::IsKeyReleased(KeyCode _KeyCode)
 {
 	KeyState keyState = InputsManager::GetKeyState(_KeyCode);
@@ -61,6 +70,7 @@ bool Input::IsKeyReleased(KeyCode _KeyCode)
 
 
 
+// Deprecated: Use native REDHOOK::IS_KEY_PRESSED instead
 bool Input::IsKeyJustPressed(KeyCode _KeyCode)
 {
 	KeyState keyState = InputsManager::GetKeyState(_KeyCode);
@@ -79,6 +89,7 @@ bool Input::IsKeyJustPressed(KeyCode _KeyCode)
 
 
 
+// Deprecated: Use native REDHOOK::IS_KEY_RELEASED instead
 bool Input::IsKeyJustReleased(KeyCode _KeyCode)
 {
 	KeyState keyState = InputsManager::GetKeyState(_KeyCode);
