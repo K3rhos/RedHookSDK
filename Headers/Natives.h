@@ -23,7 +23,7 @@ using FireHandle = int;
 using Volume = int;
 
 using Hash = uint32_t;
-using Time = float;
+using Time = uint32_t;
 
 
 
@@ -3266,21 +3266,21 @@ namespace TIME
 	static int GET_TIME_OF_DAY_AS_INT() { return Invoke<0x061A2A3C, int>(); }
 	static int GET_TOTAL_MINUTES(int _Unk0) { return Invoke<0xC52F07A8, int>(_Unk0); }
 	static int CONVERT_TIME_OF_DAY_TO_INT(int _Unk0) { return Invoke<0x57FC0E16, int>(_Unk0); }
-	static void SET_DAY(int _Unk0) { Invoke<0x0EBBDC34, void>(_Unk0); }
-	static int GET_HOUR(Time _UnixTime) { return Invoke<0x2765C37E, int>(_UnixTime); }
-	static int GET_MINUTE(Time _UnixTime) { return Invoke<0x1020BF6D, int>(_UnixTime); }
-	static int GET_SECOND(Time _UnixTime) { return Invoke<0xBA8077CF, int>(_UnixTime); }
-	static int GET_DAY(Time _UnixTime) { return Invoke<0x63D13FB0, int>(_UnixTime); }
+	static void SET_DAY(int _Day) { Invoke<0x0EBBDC34, void>(_Day); }
+	static int GET_HOUR(Time _PackedTime) { return Invoke<0x2765C37E, int>(_PackedTime); }
+	static int GET_MINUTE(Time _PackedTime) { return Invoke<0x1020BF6D, int>(_PackedTime); }
+	static int GET_SECOND(Time _PackedTime) { return Invoke<0xBA8077CF, int>(_PackedTime); }
+	static int GET_DAY(Time _PackedTime) { return Invoke<0x63D13FB0, int>(_PackedTime); }
 	static void ADD_TIME(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4) { Invoke<0xBA4FEEBC, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4); }
 	static void ADD_TIME_USING_TIME_OF_DAY(int _Unk0, int _Unk1) { Invoke<0x2F7CB0E3, void>(_Unk0, _Unk1); }
 	static Time GET_TIME_OF_DAY() { return Invoke<0x4E1DE7A5, Time>(); }
-	static Time MAKE_TIME_OF_DAY(int Hour, int Minute, int Second) { return Invoke<0xC09EAB6E, Time>(Hour, Minute, Second); }
-	static int MAKE_TIME_OF_DAY_EX(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { return Invoke<0x0E453CF0, int>(_Unk0, _Unk1, _Unk2, _Unk3); }
+	static Time MAKE_TIME_OF_DAY(int _Hour, int _Minute, int _Second) { return Invoke<0xC09EAB6E, Time>(_Hour, _Minute, _Second); }
+	static Time MAKE_TIME_OF_DAY_EX(int _Day, int _Hour, int _Minute, int _Second) { return Invoke<0x0E453CF0, int>(_Day, _Hour, _Minute, _Second); }
 	static int IS_LATER_THAN(int _Unk0, int _Unk1) { return Invoke<0x2DB3AC0F, int>(_Unk0, _Unk1); }
 	static int IS_EARLIER_THAN(int _Unk0, int _Unk1) { return Invoke<0x9C9529D8, int>(_Unk0, _Unk1); }
 	static int TIME_IS_IN_RANGE(int _Unk0, int _Unk1, int _Unk2) { return Invoke<0x243AF970, int>(_Unk0, _Unk1, _Unk2); }
 	static void ADVANCE_TIME_HOURS(int _Unk0) { Invoke<0xD4FECCBC, void>(_Unk0); }
-	static void SET_TIME_OF_DAY(Time _UnixTime) { Invoke<0xAD03186C, void>(_UnixTime); }
+	static void SET_TIME_OF_DAY(Time _PackedTime) { Invoke<0xAD03186C, void>(_PackedTime); }
 	static void SET_TIME_ACCELERATION(float _Value) { Invoke<0xB98C7AA5, void>(_Value); }
 	static float GET_TIME_ACCELERATION() { return Invoke<0xC87F16A8, float>(); }
 	static void CANCEL_TIME_WARP(int _Unk0) { Invoke<0xAF50E8A1, void>(_Unk0); }
