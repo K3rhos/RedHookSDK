@@ -81,7 +81,7 @@ static void PlaySleepAnimation()
 
 void Application::Initialize(HMODULE _Module)
 {
-	// This is now longer needed since RedHook v0.8 (If you still want to use it, uncomment this line)
+	// This is no longer needed since RedHook v0.8 (If you still want to use it, uncomment this line)
 	// InputsManager::Register();
 
 	ScriptRegister(_Module, []
@@ -108,6 +108,6 @@ void Application::Shutdown(HMODULE _Module)
 {
 	ScriptUnregister(_Module);
 
-	// This is now longer needed since RedHook v0.8 (If you still want to use it, uncomment this line)
+	// This is no longer needed since RedHook v0.8 (If you still want to use it, uncomment this line)
 	// InputsManager::Unregister();
 }
