@@ -3193,7 +3193,7 @@ namespace TASKS
 	static void TASK_GO_NEAR_ACTORSET(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0xF7B01E74, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
 	static void TASK_GO_NEAR_COORD(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x55EC940B, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
 	static void TASK_GO_NEAR_OBJECT(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5) { Invoke<0x5EA4F1FE, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5); }
-	static void TASK_GO_TO_COORD(int _Unk0, int _Unk1, int _Unk2) { Invoke<0x8C574832, void>(_Unk0, _Unk1, _Unk2); }
+	static void TASK_GO_TO_COORD(Actor _Actor, const Vector3* _Position, int _MoveType) { Invoke<0x8C574832, void>(_Actor, _Position, _MoveType); }
 	static void TASK_GO_TO_COORD_AND_STAY(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0x8636587A, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
 	static void TASK_GO_TO_COORD_NONSTOP(int _Unk0, int _Unk1, int _Unk2, int _Unk3) { Invoke<0xD62D6CE5, void>(_Unk0, _Unk1, _Unk2, _Unk3); }
 	static void TASK_GO_TO_COORD_PRECISELY(int _Unk0, int _Unk1, int _Unk2, int _Unk3, int _Unk4, int _Unk5, int _Unk6, int _Unk7) { Invoke<0x6BDB3257, void>(_Unk0, _Unk1, _Unk2, _Unk3, _Unk4, _Unk5, _Unk6, _Unk7); }

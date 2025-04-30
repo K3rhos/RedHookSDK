@@ -12,7 +12,7 @@ static bool RequestGringo(const char* _Path)
 
 	int assetId = OBJECT::GET_ASSET_ID(_Path, ASSET_TYPE_Gringo);
 
-	STREAM::STREAMING_REQUEST_PROP(assetId, true);
+	STREAM::STREAMING_REQUEST_GRINGO(assetId);
 
 	uint64_t now = GetTickCount64();
 
